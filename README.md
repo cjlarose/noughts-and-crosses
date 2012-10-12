@@ -1,4 +1,4 @@
 # CSC 335: Naughts & Crosses
-knightsr
-cjlarose
-tpyrnn
+Reid Knight (knightsr)
+Chris La Rose (cjlarose)
+Tanner Prynn (tpyrnn)
