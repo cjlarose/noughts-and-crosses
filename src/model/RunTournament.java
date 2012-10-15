@@ -23,7 +23,7 @@ public class RunTournament {
 
 		int p1_wins = t.getWins(player2);
 		int p2_wins = t.getWins(player2);
-		int ties = t.getWins(null);
+		int ties = t.getTies();
 
 		System.out.println(String.format(
 				"Beginner: %s\nTies: %s\nIntermediate: %s", p1_wins, p2_wins,

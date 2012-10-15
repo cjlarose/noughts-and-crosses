@@ -15,10 +15,14 @@ public class Tournament {
 	}
 	
 	/*
-	 * @param Player A player object.  If null, give number of ties
+	 * @param Player A player object. 
 	 * @return int the number of wins for that player
 	 */
 	public int getWins(Player player) {
+		return 0;
+	}
+	
+	public int getTies() {
 		return 0;
 	}
 	
