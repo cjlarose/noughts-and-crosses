@@ -17,7 +17,7 @@ public class Game extends Observable {
 		this.winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
 	}
 	
-	public void markPlace(Player player, int x, int y) {
+	public void makeMove(Player player, int x, int y) {
 		
 	}
 	
