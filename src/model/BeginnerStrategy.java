@@ -3,12 +3,16 @@ package model;
 public class BeginnerStrategy implements Strategy {
 
 	@Override
+	/**
+	 * The beginner strategy is just to choose the next unoccupied space from the top left.
+	 */
 	public int[] getMove(Game g, Player p) {
-		for(int i = 0; i < 9; i++) {
-			if(!g.isOccupied(i/3, i%3))
-				return new int[] {i/3, i%3};
+		for (int i = 0; i < 9; i++) {
+			if (!g.isOccupied(i / 3, i % 3))
+				return new int[] { i / 3, i % 3 };
 		}
-		return new int[] {0, 0};
-		
+
+		return new int[] { 0, 0 };
+
 	}
 }
