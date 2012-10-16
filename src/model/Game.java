@@ -22,11 +22,11 @@ public class Game extends Observable {
 		this.current_player = player1;
 	}
 	
-	public void makeMove(Player player, int x, int y) {
-		if (this.finished || x < 0 || x > 2 || y < 0 || y > 2)
+	public void makeMove(Player player, int i, int j) {
+		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2)
 			throw new IllegalArgumentException();
 		
-		int index = y * 3 + x;
+		int index = i * 3 + j;
 		int move = 1 << index;
 		
 		int all_moves = player1_moves | player2_moves;
