@@ -22,13 +22,21 @@ public class Game extends Observable {
 	}
 	
 	public void makeMove(Player player, int x, int y) {
+		if (x < 0 || x > 2 || y < 0 || y > 2)
+			throw new IllegalArgumentException();
+		
 		int index = y * 3 + x;
+		int move = 1 << index;
+		
+		int all_moves = player1_moves | player2_moves;
+		if ((all_moves ^ move) == 0)
+			throw new IllegalArgumentException();
 		if (player == player1) {
-			player1_moves |= 1 << index;
+			player1_moves |= move;
 			this.current_player = this.player2;
 		}
 		else if (player == player2) {
-			player2_moves |= 1 << index;
+			player2_moves |= move;
 			this.current_player = this.player1;
 		}
 		this.setChanged();
