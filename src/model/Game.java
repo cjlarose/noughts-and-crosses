@@ -68,7 +68,7 @@ public class Game extends Observable {
 	 * pointers to player objects where appropriate, nulls for blank
 	 * spots
 	 */
-	private Player[][] toMatrix() {
+	public Player[][] toMatrix() {
 		int tmp1 = this.player1_moves;
 		int tmp2 = this.player2_moves;
 		
