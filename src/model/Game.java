@@ -22,18 +22,19 @@ public class Game extends Observable {
 	}
 	
 	public void makeMove(Player player, int x, int y) {
-		
+		this.setChanged();
+		this.notifyObservers(null);
 	}
 	
-	private boolean isFinished() {
+	public boolean isFinished() {
 		if ((player1_moves | player2_moves) == Game.COMPLETE)
 			return true;
 		for (int i: this.winning_cases) {
-			if ((player1_moves ^ i) == i) {
+			if ((player1_moves & i) == i) {
 				this.winner = this.player1;
 				return true;
 			}
-			else if ((player2_moves ^ i) == i) {
+			else if ((player2_moves & i) == i) {
 				this.winner = this.player2;
 				return true;
 			}
@@ -41,7 +42,7 @@ public class Game extends Observable {
 		return false;
 	}
 	
-	private Player getCurrentPlayer() {
+	public Player getCurrentPlayer() {
 		return this.current_player;
 	}
 	
