@@ -11,10 +11,12 @@ public class Game extends Observable {
 	private int player1_moves;
 	private int player2_moves;
 	private Player winner;
+	private Player current_player;
 	
 	public Game(Player player1, Player player2) {
 		// encode each possible way to win as a bit array
 		this.winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
+		this.current_player = player1;
 	}
 	
 	public void makeMove(Player player, int x, int y) {
@@ -35,6 +37,10 @@ public class Game extends Observable {
 			}
 		}
 		return false;
+	}
+	
+	private Player getCurrentPlayer() {
+		return this.current_player;
 	}
 
 }
