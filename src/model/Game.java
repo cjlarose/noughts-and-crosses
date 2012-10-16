@@ -42,5 +42,46 @@ public class Game extends Observable {
 	private Player getCurrentPlayer() {
 		return this.current_player;
 	}
+	
+	/*
+	 * @return a 3x3 matrix representing all moves played so far. Contains
+	 * pointers to player objects where appropriate, nulls for blank
+	 * spots
+	 */
+	private Player[][] toMatrix() {
+		int tmp1 = this.player1_moves;
+		int tmp2 = this.player2_moves;
+		
+		Player[][] matrix = new Player[3][3];
+		for (int i = 0; i < 9; i++) {
+			int y = 3 - i / 3;
+			int x = 3 - i % 3;
+			if ((tmp1 & 1) == 1)
+				matrix[y][x] = this.player1;
+			else if ((tmp2 & 1) == 1)
+				matrix[y][x] = this.player2;
+			tmp1 >>= 1;
+			tmp2 >>= 2;
+		}
+		
+		return matrix;
+	}
+	
+	public String toString() {
+		String r = "";
+		Player[][] a = this.toMatrix();
+		for (int n = 0; n < 3; n++) {
+			for (int m = 0; m < 3; m++) {
+				if (a[m][n] == this.player1)
+					r += "X";
+				else if (a[m][n] == this.player2)
+					r += "O";
+				else
+					r += " ";
+			}
+			r += "\n";
+		}
+		return r;
+	}
 
 }
