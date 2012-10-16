@@ -16,6 +16,8 @@ public class Game extends Observable {
 	public Game(Player player1, Player player2) {
 		// encode each possible way to win as a bit array
 		this.winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
+		this.player1 = player1;
+		this.player2 = player2;
 		this.current_player = player1;
 	}
 	
@@ -61,7 +63,7 @@ public class Game extends Observable {
 			else if ((tmp2 & 1) == 1)
 				matrix[y][x] = this.player2;
 			tmp1 >>= 1;
-			tmp2 >>= 2;
+			tmp2 >>= 1;
 		}
 		
 		return matrix;
@@ -77,7 +79,7 @@ public class Game extends Observable {
 				else if (a[m][n] == this.player2)
 					r += "O";
 				else
-					r += " ";
+					r += "-";
 			}
 			r += "\n";
 		}
