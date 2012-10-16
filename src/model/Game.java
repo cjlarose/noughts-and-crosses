@@ -12,6 +12,7 @@ public class Game extends Observable {
 	private int player2_moves;
 	private Player winner;
 	private Player current_player;
+	private boolean finished = false;
 	
 	public Game(Player player1, Player player2) {
 		// encode each possible way to win as a bit array
@@ -22,7 +23,7 @@ public class Game extends Observable {
 	}
 	
 	public void makeMove(Player player, int x, int y) {
-		if (x < 0 || x > 2 || y < 0 || y > 2)
+		if (this.finished || x < 0 || x > 2 || y < 0 || y > 2)
 			throw new IllegalArgumentException();
 		
 		int index = y * 3 + x;
@@ -39,24 +40,29 @@ public class Game extends Observable {
 			player2_moves |= move;
 			this.current_player = this.player1;
 		}
+		
+		this.checkFinished();
 		this.setChanged();
 		this.notifyObservers(null);
 	}
 	
 	public boolean isFinished() {
+		return this.finished;
+	}
+	
+	public void checkFinished() {
 		if ((player1_moves | player2_moves) == Game.COMPLETE)
-			return true;
+			this.finished = true;
 		for (int i: this.winning_cases) {
 			if ((player1_moves & i) == i) {
 				this.winner = this.player1;
-				return true;
+				this.finished = true;
 			}
 			else if ((player2_moves & i) == i) {
 				this.winner = this.player2;
-				return true;
+				this.finished = true;
 			}
 		}
-		return false;
 	}
 	
 	public Player getCurrentPlayer() {
