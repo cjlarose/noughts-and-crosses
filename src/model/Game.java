@@ -22,6 +22,15 @@ public class Game extends Observable {
 	}
 	
 	public void makeMove(Player player, int x, int y) {
+		int index = y * 3 + x;
+		if (player == player1) {
+			player1_moves |= 1 << index;
+			this.current_player = this.player2;
+		}
+		else if (player == player2) {
+			player2_moves |= 1 << index;
+			this.current_player = this.player1;
+		}
 		this.setChanged();
 		this.notifyObservers(null);
 	}
@@ -57,8 +66,8 @@ public class Game extends Observable {
 		
 		Player[][] matrix = new Player[3][3];
 		for (int i = 0; i < 9; i++) {
-			int y = 3 - i / 3;
-			int x = 3 - i % 3;
+			int y = i / 3;
+			int x = i % 3;
 			if ((tmp1 & 1) == 1)
 				matrix[y][x] = this.player1;
 			else if ((tmp2 & 1) == 1)
@@ -73,8 +82,8 @@ public class Game extends Observable {
 	public String toString() {
 		String r = "";
 		Player[][] a = this.toMatrix();
-		for (int n = 0; n < 3; n++) {
-			for (int m = 0; m < 3; m++) {
+		for (int m = 0; m < 3; m++) {
+			for (int n = 0; n < 3; n++) {
 				if (a[m][n] == this.player1)
 					r += "X";
 				else if (a[m][n] == this.player2)
