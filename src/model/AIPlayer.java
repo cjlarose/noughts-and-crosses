@@ -18,7 +18,7 @@ public class AIPlayer implements Player {
 	 * @return (x,y) coordinates of chosen move
 	 */
 	public int[] getMove(Game g) {
-		return new int[] {0, 0};
+		return this.strategy.getMove(g);
 	}
 	
 }
