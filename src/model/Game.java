@@ -69,7 +69,15 @@ public class Game extends Observable {
 		return this.current_player;
 	}
 	
-	/*
+	public boolean isOccupied(int i, int j) {
+		Player[][] matrix = this.toMatrix();
+		if(matrix[i][j] == null)
+			return false;
+		return true;
+		
+	}
+	
+	/**
 	 * @return a 3x3 matrix representing all moves played so far. Contains
 	 * pointers to player objects where appropriate, nulls for blank
 	 * spots
