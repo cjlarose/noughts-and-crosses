@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.event.ActionListener;
-
 public class AIPlayer implements Player {
 
 	private Strategy strategy; 

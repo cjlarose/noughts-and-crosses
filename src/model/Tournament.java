@@ -6,7 +6,7 @@ import java.util.List;
 public class Tournament {
 
 	private List<Game> games;
-	private int[] scores; // three tuple container the number of wins
+	private int[] scores; // three tuple containing the number of wins
 	private Player player1;
 	private Player player2;
 	

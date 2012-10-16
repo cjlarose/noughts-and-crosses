@@ -90,11 +90,11 @@ public class Game extends Observable {
 	public String toString() {
 		String r = "";
 		Player[][] a = this.toMatrix();
-		for (int m = 0; m < 3; m++) {
-			for (int n = 0; n < 3; n++) {
-				if (a[m][n] == this.player1)
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (a[i][j] == this.player1)
 					r += "X";
-				else if (a[m][n] == this.player2)
+				else if (a[i][j] == this.player2)
 					r += "O";
 				else
 					r += "-";
