@@ -13,10 +13,5 @@ public class AIPlayer implements Player {
 	public void setStrategy(Strategy s) {
 		this.strategy = s;
 	}
-
-	@Override
-	public void respond(Game g, ActionListener e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
