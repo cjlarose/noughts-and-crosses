@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class BeginnerStrategy implements Strategy {
@@ -15,6 +16,5 @@ public class BeginnerStrategy implements Strategy {
 		while (g.isOccupied(i / 3, i % 3))
 			i = (i + 1) % 9;
 		return new int[] {i / 3, i % 3};
-
 	}
 }

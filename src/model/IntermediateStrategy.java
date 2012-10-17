@@ -56,16 +56,14 @@ public class IntermediateStrategy implements Strategy {
 		}
 		LinkedList<Integer> remaining_moves = g.getRemainingMoves();
 		Random rand = new Random();
-		int loc;
-		int index;
-		do {
-			int i = rand.nextInt(remaining_moves.size());
-			loc = remaining_moves.get(i);
-			index = 0;
-			while ((loc >>= 1) != 0)
-				index++;
-		} while (g.isOccupied(index / 3, index % 3));
+
+		int i = rand.nextInt(remaining_moves.size());
+		int loc = remaining_moves.get(i);
+		int index = 0;
+		while ((loc >>= 1) != 0)
+			index++;
 		return new int[] { index / 3, index % 3 };
+
 	}
 
 }
