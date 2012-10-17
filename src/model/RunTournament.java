@@ -38,7 +38,7 @@ public class RunTournament implements Observer {
 		}
 
 		System.out.println(String.format(
-				"Beginner: %s\nTies: %s\nIntermediate: %s", beginner_wins, ties,
+				"    Beginner: %s\n        Ties: %s\nIntermediate: %s", beginner_wins, ties,
 				intermediate_wins));
 		
 		this.beginner_wins = 0;
