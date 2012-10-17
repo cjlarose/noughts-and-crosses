@@ -20,13 +20,19 @@ s.close();
 
 
 Server Side:
-ServerSocket server = new ServerSocket(receiving_port);
-//this port cannot already be bound by another program
+try {
+	ServerSocket server = new ServerSocket(receiving_port);
+	//this port cannot already be bound by another program
 
-socket s = server.accept()
-//this blocks as well (program will stop until something comes in to try and establish a connection)
-//client side happens after server side
-ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+	socket s = server.accept()
+	//this blocks as well (program will stop until something comes in to try and establish a connection)
+	//client side happens after server side
+	ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+	ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 
-//now, the server and client sides are indistinguishable. First person to look for connection is server, then client connects, and then they are the same.
+	//now, the server and client sides are indistinguishable. First person to look for connection is server, then client connects,
+	 and then they are the same.
+	s.close();
+	server.close();
+}
+catch (same as above)...
