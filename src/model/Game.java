@@ -19,6 +19,7 @@ public class Game extends Observable {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.current_player = player1;
+		
 	}
 	
 	public void makeMove(Player player, int x, int y) {
