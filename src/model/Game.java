@@ -71,11 +71,11 @@ public class Game extends Observable {
 	}
 	
 	public boolean isOccupied(int i, int j) {
-		Player[][] matrix = this.toMatrix();
-		if(matrix[i][j] == null)
-			return false;
-		return true;
+		int index = i * 3 + j;
+		int all_moves = this.player1_moves | this.player2_moves;
 		
+		all_moves >>= index;
+		return (all_moves & 1) == 1;
 	}
 	
 	public int getPlayer1Moves() {
