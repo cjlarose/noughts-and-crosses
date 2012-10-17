@@ -55,9 +55,9 @@ public class RunTournament implements Observer {
 			Player winner = ((Game) game).getWinner();
 			if (winner == null)
 				this.ties++;
-			if (winner == beginner_player)
+			else if (winner == beginner_player)
 				this.beginner_wins++;
-			if (winner == intermediate_player)
+			else if (winner == intermediate_player)
 				this.intermediate_wins++;
 			//System.out.println("finished game");
 		} else {
