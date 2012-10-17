@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -48,6 +49,7 @@ public class RunTournament implements Observer {
 
 	@Override
 	public void update(Observable game, Object arg) {
+		//System.out.println(game.toString());
 		if (((Game) game).isFinished()) {
 			Player winner = ((Game) game).getWinner();
 			if (winner == null)
@@ -61,6 +63,7 @@ public class RunTournament implements Observer {
 			Player current_player = ((Game) game).getCurrentPlayer();
 			//System.out.println(String.format("%s's turn", current_player == beginner_player ? "Beginner" : "Intermediate"));
 			int[] move = ((AIPlayer) current_player).getMove((Game) game);
+			//System.out.println(Arrays.toString(move));
 			((Game) game).makeMove(current_player, move[0], move[1]);
 		}
 	}
