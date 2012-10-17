@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,7 +17,7 @@ public class RunTournament implements Observer {
 		
 		rt.beginner_player = new AIPlayer(new BeginnerStrategy());
 		//rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
-		rt.intermediate_player = new AIPlayer(new BeginnerStrategy());
+		rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
 		
 		
 		System.out.println("Result of playing 1000 games when beginner goes first:");
@@ -34,6 +35,7 @@ public class RunTournament implements Observer {
 			Game g = new Game(player1, player2);
 			g.addObserver(this);
 			this.update(g, null);
+			//System.out.println(g.toString());
 		}
 
 		System.out.println(String.format(
