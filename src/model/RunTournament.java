@@ -1,9 +1,7 @@
 package model;
 
-import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Scanner;
 
 public class RunTournament implements Observer {
 	

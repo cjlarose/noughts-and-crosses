@@ -78,14 +78,6 @@ public class Game extends Observable {
 		return (all_moves & 1) == 1;
 	}
 	
-	public int getPlayer1Moves() {
-		return this.player1_moves;
-	}
-	
-	public int getPlayer2Moves() {
-		return this.player2_moves;
-	}
-	
 	public Player getWinner() {
 		return this.winner;
 	}
