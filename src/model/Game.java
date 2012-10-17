@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.Observable;
 
 public class Game extends Observable {
@@ -7,6 +8,8 @@ public class Game extends Observable {
 	private Player player1;
 	private Player player2;
 	private final int[] winning_cases;
+	private int [] remaining_moves_array;
+	private LinkedList<Integer> remaining_moves;
 	private static final int COMPLETE = 511;
 	private int player1_moves;
 	private int player2_moves;
@@ -20,7 +23,12 @@ public class Game extends Observable {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.current_player = player1;
+		this.remaining_moves = new LinkedList<Integer>();
+		this.remaining_moves_array = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256};
 		
+		for (int i : remaining_moves_array) {
+			remaining_moves.add(i);
+		}
 	}
 	
 	/**
@@ -40,6 +48,7 @@ public class Game extends Observable {
 		int all_moves = player1_moves | player2_moves;
 		if ((all_moves ^ move) == 0)
 			throw new IllegalArgumentException();
+		remaining_moves.remove((Integer)move);
 		if (player == player1) {
 			player1_moves |= move;
 			this.current_player = this.player2;
@@ -54,10 +63,17 @@ public class Game extends Observable {
 		this.notifyObservers(null);
 	}
 	
+<<<<<<< HEAD
+	public LinkedList<Integer> getRemainingMoves() {
+		return remaining_moves;
+	}
+
+=======
 	/**
 	 * Returns whether or not the game is finished
 	 * @return boolean: true if game is finished, false otherwise
 	 */
+>>>>>>> f8c78d551dd4742ab96db36e75ebb5f780e0c377
 	public boolean isFinished() {
 		return this.finished;
 	}
