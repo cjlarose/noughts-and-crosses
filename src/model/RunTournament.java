@@ -24,9 +24,16 @@ public class RunTournament implements Observer {
 		rt.playTournament(rt.beginner_player, rt.intermediate_player, 1000);
 		
 		System.out.println();
+		rt.reset();
 		
 		System.out.println("Result of playing 1000 games when intermediate goes first:");
 		rt.playTournament(rt.intermediate_player, rt.beginner_player, 1000);
+	}
+	
+	private void reset() {
+		this.beginner_wins = 0;
+		this.intermediate_wins = 0;
+		this.ties = 0;
 	}
 	
 	private void playTournament(Player player1, Player player2, int numGames) {
@@ -38,8 +45,8 @@ public class RunTournament implements Observer {
 		}
 
 		System.out.println(String.format(
-				"Beginner: %s\nTies: %s\nIntermediate: %s", beginner_wins, intermediate_wins,
-				ties));
+				"Beginner: %s\nTies: %s\nIntermediate: %s", beginner_wins, ties,
+				intermediate_wins));
 	}
 
 	@Override
