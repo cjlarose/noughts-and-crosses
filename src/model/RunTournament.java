@@ -11,6 +11,7 @@ public class RunTournament implements Observer {
 	int ties = 0;
 	Player beginner_player;
 	Player intermediate_player;
+	public static final int num_games = 1000;
 
 	public static void main(String[] args) {
 		RunTournament rt = new RunTournament();
@@ -20,18 +21,18 @@ public class RunTournament implements Observer {
 		rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
 		
 		
-		System.out.println("Result of playing 1000 games when beginner goes first:");
-		rt.playTournament(rt.beginner_player, rt.intermediate_player, 1000);
+		System.out.println("Result of playing "+num_games+" games when beginner goes first:");
+		rt.playTournament(rt.beginner_player, rt.intermediate_player);
 		
 		System.out.println();
 		
-		System.out.println("Result of playing 1000 games when intermediate goes first:");
-		rt.playTournament(rt.intermediate_player, rt.beginner_player, 1000);
+		System.out.println("Result of playing "+num_games+" games when intermediate goes first:");
+		rt.playTournament(rt.intermediate_player, rt.beginner_player);
 	}
 	
-	private void playTournament(Player player1, Player player2, int numGames) {
+	private void playTournament(Player player1, Player player2) {
 
-		for (int i = 0; i < numGames; i++) {
+		for (int i = 0; i < num_games; i++) {
 			Game g = new Game(player1, player2);
 			g.addObserver(this);
 			this.update(g, null);
