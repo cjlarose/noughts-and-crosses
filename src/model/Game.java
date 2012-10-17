@@ -23,6 +23,13 @@ public class Game extends Observable {
 		
 	}
 	
+	/**
+	 * Mark a move by a player on the game board
+	 * @param player is the player who made the move. Precondition: that player
+	 * is either player1 or player2 that the game was initialized with
+	 * @param i the row coordinate to mark
+	 * @param j the column coordinate to mark
+	 */
 	public void makeMove(Player player, int i, int j) {
 		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2)
 			throw new IllegalArgumentException();
@@ -47,11 +54,18 @@ public class Game extends Observable {
 		this.notifyObservers(null);
 	}
 	
+	/**
+	 * Returns whether or not the game is finished
+	 * @return boolean: true if game is finished, false otherwise
+	 */
 	public boolean isFinished() {
 		return this.finished;
 	}
 	
-	public void checkFinished() {
+	/**
+	 * Check if the game is finished, change this.finished appropriately
+	 */
+	private void checkFinished() {
 		if ((player1_moves | player2_moves) == Game.COMPLETE)
 			this.finished = true;
 		for (int i: this.winning_cases) {
@@ -66,10 +80,20 @@ public class Game extends Observable {
 		}
 	}
 	
+	/**
+	 * Returns the player who's turn it is
+	 * @return Player the current player
+	 */
 	public Player getCurrentPlayer() {
 		return this.current_player;
 	}
 	
+	/**
+	 * Checks if an (i, j)-entry is occupied by a move
+	 * @param i row coordinate, 0 <= i <= 2
+	 * @param j column coordinate, 0 <= j <= 2
+	 * @return true if the space is occupied, false otherwise
+	 */
 	public boolean isOccupied(int i, int j) {
 		int index = i * 3 + j;
 		int all_moves = this.player1_moves | this.player2_moves;
@@ -78,11 +102,16 @@ public class Game extends Observable {
 		return (all_moves & 1) == 1;
 	}
 	
+	/**
+	 * Get the winner of this game (assuming the game is finished)
+	 * @return the winner of the game, null if tied
+	 */
 	public Player getWinner() {
 		return this.winner;
 	}
 	
 	/**
+	 * Represent the board as a matrix
 	 * @return a 3x3 matrix representing all moves played so far. Contains
 	 * pointers to player objects where appropriate, nulls for blank
 	 * spots
@@ -106,6 +135,10 @@ public class Game extends Observable {
 		return matrix;
 	}
 	
+	/**
+	 * Give a string representation of the board
+	 * @return the board as a string of X's and O's
+	 */
 	public String toString() {
 		String r = "";
 		Player[][] a = this.toMatrix();
