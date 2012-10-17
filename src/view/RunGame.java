@@ -33,11 +33,11 @@ public class RunGame implements Observer {
 			System.out.println("FINISHED");
 		} else {
 			Player current_player = this.game.getCurrentPlayer();
-			System.out.println(String.format("%s's turn", current_player == player1 ? "X" : "O"));
+			System.out.println(String.format("%c's turn", current_player == player1 ? 'X' : 'O'));
 			Scanner s = new Scanner(System.in);
-			int n = s.nextInt();
-			int m = s.nextInt();
-			this.game.makeMove(current_player, n, m);
+			int i = s.nextInt();
+			int j = s.nextInt();
+			this.game.makeMove(current_player, i, j);
 		}
 		// print board
 	}

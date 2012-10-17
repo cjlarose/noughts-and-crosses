@@ -12,6 +12,7 @@ public class Game extends Observable {
 	private int player2_moves;
 	private Player winner;
 	private Player current_player;
+	private boolean finished = false;
 	
 	public Game(Player player1, Player player2) {
 		// encode each possible way to win as a bit array
@@ -22,11 +23,11 @@ public class Game extends Observable {
 		
 	}
 	
-	public void makeMove(Player player, int x, int y) {
-		if (x < 0 || x > 2 || y < 0 || y > 2)
+	public void makeMove(Player player, int i, int j) {
+		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2)
 			throw new IllegalArgumentException();
 		
-		int index = y * 3 + x;
+		int index = i * 3 + j;
 		int move = 1 << index;
 		
 		int all_moves = player1_moves | player2_moves;
@@ -40,36 +41,49 @@ public class Game extends Observable {
 			player2_moves |= move;
 			this.current_player = this.player1;
 		}
+		
+		this.checkFinished();
 		this.setChanged();
 		this.notifyObservers(null);
 	}
 	
 	public boolean isFinished() {
+		return this.finished;
+	}
+	
+	public void checkFinished() {
 		if ((player1_moves | player2_moves) == Game.COMPLETE)
-			return true;
+			this.finished = true;
 		for (int i: this.winning_cases) {
 			if ((player1_moves & i) == i) {
 				this.winner = this.player1;
-				return true;
+				this.finished = true;
 			}
 			else if ((player2_moves & i) == i) {
 				this.winner = this.player2;
-				return true;
+				this.finished = true;
 			}
 		}
-		return false;
 	}
 	
 	public Player getCurrentPlayer() {
 		return this.current_player;
 	}
 	
-	/*
+	public boolean isOccupied(int i, int j) {
+		Player[][] matrix = this.toMatrix();
+		if(matrix[i][j] == null)
+			return false;
+		return true;
+		
+	}
+	
+	/**
 	 * @return a 3x3 matrix representing all moves played so far. Contains
 	 * pointers to player objects where appropriate, nulls for blank
 	 * spots
 	 */
-	private Player[][] toMatrix() {
+	public Player[][] toMatrix() {
 		int tmp1 = this.player1_moves;
 		int tmp2 = this.player2_moves;
 		
@@ -91,11 +105,11 @@ public class Game extends Observable {
 	public String toString() {
 		String r = "";
 		Player[][] a = this.toMatrix();
-		for (int m = 0; m < 3; m++) {
-			for (int n = 0; n < 3; n++) {
-				if (a[m][n] == this.player1)
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (a[i][j] == this.player1)
 					r += "X";
-				else if (a[m][n] == this.player2)
+				else if (a[i][j] == this.player2)
 					r += "O";
 				else
 					r += "-";
