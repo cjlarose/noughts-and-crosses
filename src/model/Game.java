@@ -78,6 +78,14 @@ public class Game extends Observable {
 		
 	}
 	
+	public int getPlayer1Moves() {
+		return this.player1_moves;
+	}
+	
+	public int getPlayer2Moves() {
+		return this.player2_moves;
+	}
+	
 	/**
 	 * @return a 3x3 matrix representing all moves played so far. Contains
 	 * pointers to player objects where appropriate, nulls for blank
