@@ -37,7 +37,12 @@ public class RunGame implements Observer {
 			Scanner s = new Scanner(System.in);
 			int i = s.nextInt();
 			int j = s.nextInt();
-			this.game.makeMove(current_player, i, j);
+			try {
+				this.game.makeMove(current_player, i, j);
+			} catch(Exception e) {
+				System.out.println("ILLEGAL MOVE, MUTHAFUKKA");
+				this.update(o, null);
+			}
 		}
 		// print board
 	}
