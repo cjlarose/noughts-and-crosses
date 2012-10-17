@@ -60,6 +60,13 @@ public class Game extends Observable {
 		return remaining_moves;
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Returns whether or not the game is finished
+	 * @return boolean: true if game is finished, false otherwise
+	 */
+>>>>>>> 51f843090de92bdf9b5f811f1f47c53d4d83a2a5
 	public boolean isFinished() {
 		return this.finished;
 	}
