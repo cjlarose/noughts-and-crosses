@@ -71,11 +71,15 @@ public class Game extends Observable {
 	}
 	
 	public boolean isOccupied(int i, int j) {
-		Player[][] matrix = this.toMatrix();
-		if(matrix[i][j] == null)
-			return false;
-		return true;
+		int index = i * 3 + j;
+		int all_moves = this.player1_moves | this.player2_moves;
 		
+		all_moves >>= index;
+		return (all_moves & 1) == 1;
+	}
+	
+	public Player getWinner() {
+		return this.winner;
 	}
 	
 	/**
@@ -88,13 +92,13 @@ public class Game extends Observable {
 		int tmp2 = this.player2_moves;
 		
 		Player[][] matrix = new Player[3][3];
-		for (int i = 0; i < 9; i++) {
-			int y = i / 3;
-			int x = i % 3;
+		for (int n = 0; n < 9; n++) {
+			int i = n / 3;
+			int j = n % 3;
 			if ((tmp1 & 1) == 1)
-				matrix[y][x] = this.player1;
+				matrix[i][j] = this.player1;
 			else if ((tmp2 & 1) == 1)
-				matrix[y][x] = this.player2;
+				matrix[i][j] = this.player2;
 			tmp1 >>= 1;
 			tmp2 >>= 1;
 		}
