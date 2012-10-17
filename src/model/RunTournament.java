@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class RunTournament implements Observer {
 	
-	int p1_wins = 0;
-	int p2_wins = 0;
+	int beginner_wins = 0;
+	int intermediate_wins = 0;
 	int ties = 0;
 	Player beginner_player;
 	Player intermediate_player;
@@ -16,7 +16,8 @@ public class RunTournament implements Observer {
 		RunTournament rt = new RunTournament();
 		
 		rt.beginner_player = new AIPlayer(new BeginnerStrategy());
-		rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
+		//rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
+		rt.intermediate_player = new AIPlayer(new BeginnerStrategy());
 		
 		
 		System.out.println("Result of playing 1000 games when beginner goes first:");
@@ -37,17 +38,24 @@ public class RunTournament implements Observer {
 		}
 
 		System.out.println(String.format(
-				"Beginner: %s\nTies: %s\nIntermediate: %s", p1_wins, p2_wins,
+				"Beginner: %s\nTies: %s\nIntermediate: %s", beginner_wins, intermediate_wins,
 				ties));
 	}
 
 	@Override
 	public void update(Observable game, Object arg) {
 		if (((Game) game).isFinished()) {
-			System.out.println("finished game");
+			Player winner = ((Game) game).getWinner();
+			if (winner == null)
+				this.ties++;
+			if (winner == beginner_player)
+				this.beginner_wins++;
+			if (winner == intermediate_player)
+				this.intermediate_wins++;
+			//System.out.println("finished game");
 		} else {
 			Player current_player = ((Game) game).getCurrentPlayer();
-			System.out.println(String.format("%s's turn", current_player == beginner_player ? "Beginner" : "Intermediate"));
+			//System.out.println(String.format("%s's turn", current_player == beginner_player ? "Beginner" : "Intermediate"));
 			int[] move = ((AIPlayer) current_player).getMove((Game) game);
 			((Game) game).makeMove(current_player, move[0], move[1]);
 		}

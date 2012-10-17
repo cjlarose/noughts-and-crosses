@@ -86,6 +86,10 @@ public class Game extends Observable {
 		return this.player2_moves;
 	}
 	
+	public Player getWinner() {
+		return this.winner;
+	}
+	
 	/**
 	 * @return a 3x3 matrix representing all moves played so far. Contains
 	 * pointers to player objects where appropriate, nulls for blank
