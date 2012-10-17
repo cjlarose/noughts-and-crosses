@@ -63,17 +63,14 @@ public class Game extends Observable {
 		this.notifyObservers(null);
 	}
 	
-<<<<<<< HEAD
 	public LinkedList<Integer> getRemainingMoves() {
 		return remaining_moves;
 	}
 
-=======
 	/**
 	 * Returns whether or not the game is finished
 	 * @return boolean: true if game is finished, false otherwise
 	 */
->>>>>>> f8c78d551dd4742ab96db36e75ebb5f780e0c377
 	public boolean isFinished() {
 		return this.finished;
 	}
