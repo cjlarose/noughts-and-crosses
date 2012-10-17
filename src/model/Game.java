@@ -32,8 +32,10 @@ public class Game extends Observable {
 	}
 	
 	public void makeMove(Player player, int i, int j) {
-		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2)
+		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2) {
+			System.out.println(i + " " + j);
 			throw new IllegalArgumentException();
+		}
 		
 		int index = i * 3 + j;
 		int move = 1 << index;
@@ -60,13 +62,11 @@ public class Game extends Observable {
 		return remaining_moves;
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Returns whether or not the game is finished
 	 * @return boolean: true if game is finished, false otherwise
 	 */
->>>>>>> 51f843090de92bdf9b5f811f1f47c53d4d83a2a5
+
 	public boolean isFinished() {
 		return this.finished;
 	}

@@ -5,9 +5,17 @@ import java.util.Random;
 
 public class IntermediateStrategy implements Strategy {
 
-	private int[] almost_wins = { 384, 192, 320, 288, 260, 36, 48, 40, 24, 144,
-			130, 18, 6, 5, 3, 72, 65, 9, 272, 257, 17, 80, 68, 20 };
-	private int[] wins = { 448, 56, 7, 292, 146, 73, 273, 84 };
+	private final int[] almost_wins = { 384, 192, 320, 288, 260, 36, 48, 40,
+			24, 144, 130, 18, 6, 5, 3, 72, 65, 9, 272, 257, 17, 80, 68, 20 };
+	private final int[] wins = { 448, 56, 7, 292, 146, 73, 273, 84 };
+	private final LinkedList<Integer> single_moves;
+
+	public IntermediateStrategy() {
+		single_moves = new LinkedList<Integer>();
+		for (int i = 0; i < 9; i++) {
+			single_moves.add((int) Math.pow(2, i));
+		}
+	}
 
 	@Override
 	public int[] getMove(Game g, Player p) {
@@ -30,26 +38,34 @@ public class IntermediateStrategy implements Strategy {
 		for (int i : almost_wins) {
 			if ((computer_moves & i) == i) {
 				for (int j : wins) {
-					if (((j | i) & j) == j) {
-						int loc = j ^ i;
-						int index = 0;
-						while ((loc >>= 1) != 0)
+					int loc = j ^ i;
+					if (single_moves.contains(loc)) {
+						 int index = 0;
+						 while (loc != 1) {
+							 loc >>= 1;
 							index++;
-						if (!g.isOccupied(index / 3, index % 3))
-							return new int[] { index / 3, index % 3 };
+						 }
+						 if (!g.isOccupied(index / 3, index % 3)) {
+							 // System.out.println(index);
+							 return new int[] { index / 3, index % 3 };
+						 }
 					}
 				}
 			}
 
 			if ((player_moves & i) == i) {
 				for (int j : wins) {
-					if (((j | i) & j) == j) {
-						int loc = j ^ i;
-						int index = 0;
-						while ((loc >>= 1) != 0)
+					int loc = j ^ i;
+					if (single_moves.contains(loc)) {
+						 int index = 0;
+						 while (loc != 1) {
+							 loc >>= 1;
 							index++;
-						if (!g.isOccupied(index / 3, index % 3))
-							return new int[] { index / 3, index % 3 };
+						 }
+						 if (!g.isOccupied(index / 3, index % 3)) {
+							 // System.out.println(index);
+							 return new int[] { index / 3, index % 3 };
+						 }
 					}
 				}
 			}

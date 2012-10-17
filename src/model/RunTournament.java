@@ -65,6 +65,7 @@ public class RunTournament implements Observer {
 	public void update(Observable game, Object arg) {
 		if (((Game) game).isFinished()) {
 			Player winner = ((Game) game).getWinner();
+			//System.out.println(game.toString());
 			if (winner == null)
 				this.ties++;
 			else if (winner == beginner_player)
@@ -74,6 +75,7 @@ public class RunTournament implements Observer {
 		} else {
 			Player current_player = ((Game) game).getCurrentPlayer();
 			int[] move = ((AIPlayer) current_player).getMove((Game) game);
+			//System.out.println(game.toString());
 			((Game) game).makeMove(current_player, move[0], move[1]);
 		}
 	}
