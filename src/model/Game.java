@@ -31,6 +31,11 @@ public class Game extends Observable {
 		}
 	}
 	
+	public void start() {
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
 	/**
 	 * Mark a move by a player on the game board
 	 * @param player is the player who made the move. Precondition: that player

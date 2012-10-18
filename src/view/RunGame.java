@@ -15,7 +15,6 @@ public class RunGame implements GameView {
 	private Player player1;
 	private Player player2;
 	private GUIListener listener;
-	private Game game;
 	
 	public static void main(String[] args) {
 		Controller c = new Controller(new RunGame());
@@ -32,29 +31,25 @@ public class RunGame implements GameView {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(this.game.toString());
-		if (this.game.isFinished()) {
+		Game g = (Game) o;
+		System.out.println(g.toString());
+		if (g.isFinished()) {
 			System.out.println("FINISHED");
 		} else {
-			Player current_player = this.game.getCurrentPlayer();
+			Player current_player = g.getCurrentPlayer();
 			System.out.println(String.format("%c's turn", current_player == player1 ? 'X' : 'O'));
 			Scanner s = new Scanner(System.in);
 			int i = s.nextInt();
 			int j = s.nextInt();
 			try {
-				this.game.makeMove(current_player, i, j);
+				// TODO: Remove call to make move
+				g.makeMove(current_player, i, j);
 			} catch(Exception e) {
 				System.out.println("ILLEGAL MOVE, MUTHAFUKKA");
 				this.update(o, null);
 			}
 		}
 		// print board
-	}
-
-	@Override
-	public void setGame(Game g) {
-		this.game = g;
-		this.update(this.game, null);
 	}
 
 }

@@ -24,10 +24,4 @@ public class MainGUI extends JFrame implements GameView {
 		
 	}
 
-	@Override
-	public void setGame(Game g) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

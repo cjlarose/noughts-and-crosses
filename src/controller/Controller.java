@@ -51,7 +51,7 @@ public class Controller {
 			player2 = p2;
 			game = new Game(player1, player2);
 			game.addObserver(view);
-			view.setGame(game);
+			game.start();
 		}
 	}
 	
