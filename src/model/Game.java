@@ -53,7 +53,7 @@ public class Game extends Observable {
 		int move = 1 << index;
 		
 		int all_moves = player1_moves | player2_moves;
-		if ((all_moves ^ move) == 0)
+		if ((all_moves | move) == all_moves)
 			throw new IllegalArgumentException();
 		remaining_moves.remove((Integer)move);
 		if (player == player1) {
