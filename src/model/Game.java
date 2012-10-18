@@ -67,7 +67,18 @@ public class Game extends Observable {
 		
 		this.checkFinished();
 		this.setChanged();
-		this.notifyObservers(null);
+		this.notifyObservers(new GameMove(player, i, j));
+	}
+	
+	public class GameMove {
+		public int i;
+		public int j;
+		public Player player;
+		public GameMove(Player p, int i, int j) {
+			this.player = p;
+			this.i = i;
+			this.j = j;
+		}
 	}
 	
 	public LinkedList<Integer> getRemainingMoves() {
