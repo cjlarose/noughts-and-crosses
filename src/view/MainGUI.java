@@ -23,6 +23,11 @@ public class MainGUI extends JFrame implements GameView {
 	private JButton textViewButton;
 	private JButton graphicViewButton;
 	
+	public void main(String[] args) {
+		MainGUI g = new MainGUI();
+		g.setVisible(true);
+	}
+	
 	public MainGUI() {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

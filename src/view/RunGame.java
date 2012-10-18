@@ -17,9 +17,8 @@ public class RunGame implements GameView {
 	private GUIListener listener;
 	
 	public static void main(String[] args) {
-		//Controller c = new Controller(new RunGame());
-		MainGUI g = new MainGUI();
-		g.setVisible(true);
+		Controller c = new Controller(new RunGame());
+		
 	}
 	
 	@Override
