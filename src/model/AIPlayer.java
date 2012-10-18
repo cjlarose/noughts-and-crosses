@@ -21,6 +21,7 @@ public class AIPlayer implements Player {
 	 * @param g the game to respond to
 	 * @return (i, j) coordinates of chosen move
 	 */
+	@Override
 	public int[] getMove(Game g) {
 		return this.strategy.getMove(g, this);
 	}
