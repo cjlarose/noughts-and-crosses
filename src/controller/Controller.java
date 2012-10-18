@@ -34,6 +34,7 @@ public class Controller {
 	 */
 	public Controller(GameView view) {
 		this.view = view;
+		this.view.setGlobalListener(new GUIListener());
 	}
 	
 	public class GUIListener {
@@ -50,6 +51,7 @@ public class Controller {
 			player2 = p2;
 			game = new Game(player1, player2);
 			game.addObserver(view);
+			view.setGame(game);
 		}
 	}
 	

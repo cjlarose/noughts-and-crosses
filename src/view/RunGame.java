@@ -1,29 +1,33 @@
 package view;
 
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Scanner;
+
+import controller.Controller;
+import controller.Controller.GUIListener;
 
 import model.Game;
 import model.HumanPlayer;
 import model.Player;
 
-public class RunGame implements Observer {
+public class RunGame implements GameView {
 	
-	private Game game;
 	private Player player1;
 	private Player player2;
+	private GUIListener listener;
+	private Game game;
 	
 	public static void main(String[] args) {
-		RunGame rg = new RunGame();
+		Controller c = new Controller(new RunGame());
 	}
 	
-	public RunGame() {
+	@Override
+	public void setGlobalListener(GUIListener l) {
+		this.listener = l;
+		
 		this.player1 = new HumanPlayer();
 		this.player2 = new HumanPlayer();
-		this.game = new Game(player1, player2);
-		this.game.addObserver(this);
-		this.update(this.game, null);
+		this.listener.playersChosen(this.player1, this.player2);
 	}
 
 	@Override
@@ -45,6 +49,12 @@ public class RunGame implements Observer {
 			}
 		}
 		// print board
+	}
+
+	@Override
+	public void setGame(Game g) {
+		this.game = g;
+		this.update(this.game, null);
 	}
 
 }
