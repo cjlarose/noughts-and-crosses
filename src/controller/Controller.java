@@ -25,17 +25,18 @@ public class Controller {
 	}
 	
 	public Controller() {
-		this.view.addStrategyChangedListener(new strategyChangedListener());
+		this.view.setGlobalListener(new GUIListener());
 		//this.game = new Game();
 	}
 	
-	public class strategyChangedListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent evt) {
-			Strategy s = view.getSelectedStrategy();
-			// set the ai's player's strategy to s
+	public class GUIListener {
+		public void playerMoved(Player p, int i, int j) {
+			
 		}
 		
+		public void strategyChanged(Strategy s) {
+			
+		}
 	}
+	
 }
