@@ -1,8 +1,5 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import view.*;
 import model.*;
 
@@ -16,17 +13,25 @@ import model.*;
  */
 public class Controller {
 
-	private MainGUI view;
+	private GameView view;
 	private Game game;
+	private Player player1;
+	private Player player2;
 	
+	/**
+	 * Running this class uses the default MainGUI
+	 */
 	public static void main(String[] args) {
-		// this will be the _only_ main method of the project
-		new Controller();
+		new Controller(new MainGUI());
 	}
 	
-	public Controller() {
-		this.view.setGlobalListener(new GUIListener());
-		//this.game = new Game();
+	/**
+	 * The controller should be view-implementation agnostic, so its constructor
+	 * allows any such implementation.
+	 * @param view
+	 */
+	public Controller(GameView view) {
+		this.view = view;
 	}
 	
 	public class GUIListener {
@@ -36,6 +41,15 @@ public class Controller {
 		
 		public void strategyChanged(Strategy s) {
 			
+		}
+		
+		public void playerAdded(Player p) {
+			if (player1 == null)
+				player1 = p;
+			else if (player2 == null)
+				player2 = p;
+			else
+				throw new IllegalArgumentException();
 		}
 	}
 	
