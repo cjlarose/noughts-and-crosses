@@ -43,13 +43,9 @@ public class Controller {
 			
 		}
 		
-		public void playerAdded(Player p) {
-			if (player1 == null)
-				player1 = p;
-			else if (player2 == null)
-				player2 = p;
-			else
-				throw new IllegalArgumentException();
+		public void playersChosen(Player p1, Player p2) {
+			player1 = p1;
+			player2 = p2;
 		}
 	}
 	
