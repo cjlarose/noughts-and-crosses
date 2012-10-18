@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Observer;
+
 import view.*;
 import model.*;
 
@@ -46,6 +48,8 @@ public class Controller {
 		public void playersChosen(Player p1, Player p2) {
 			player1 = p1;
 			player2 = p2;
+			game = new Game(player1, player2);
+			game.addObserver(view);
 		}
 	}
 	
