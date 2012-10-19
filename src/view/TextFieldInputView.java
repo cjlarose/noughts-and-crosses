@@ -31,8 +31,8 @@ public class TextFieldInputView extends JPanel implements Observer {
 	private JTextField colInput;
 	private JInternalFrame buttons;
 	private JButton make_move;
-public TextFieldInputView (Game g) {
-		this.current_game = g;
+public TextFieldInputView () {
+		//this.current_game = g;
 		
 		setSize(500, 800);
 		setLocation(10, 10);
@@ -50,7 +50,7 @@ public TextFieldInputView (Game g) {
 		Font monospace = new Font("Monospaced", Font.PLAIN, 16);
 		
 		game_view.setFont(monospace);
-		game_view.setText(current_game.toString());
+		//game_view.setText(current_game.toString());
 		game.add(game_view, "Center");
 		
 		row_stuff = new JInternalFrame();

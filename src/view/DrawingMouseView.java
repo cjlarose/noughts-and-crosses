@@ -13,7 +13,7 @@ public class DrawingMouseView extends JPanel implements Observer {
 	public static void main(String[] args) {
 	}
 	
-	public DrawingMouseView(Game g) {
+	public DrawingMouseView() {
 	}
 
 	@Override
