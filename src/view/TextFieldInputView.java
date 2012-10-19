@@ -15,69 +15,78 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controller.Controller.GUIListener;
+
 import model.Game;
 
-public class TextFieldInputView extends JFrame implements Observer {
-	private Game g;
-//		had this initially, but making each new gui may need to be done 
-//		by the main gui, now that I think about it
-	public static void main (String [] args) {
-		new TextFieldInputView().setVisible(true);
-	}
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+public class TextFieldInputView extends JPanel implements Observer {
+	private Game current_game;
+	private JInternalFrame game;
+	private JTextArea game_view;
+	private JInternalFrame row_stuff;
+	private JLabel row;
+	private JTextField rowInput;
+	private JInternalFrame col_stuff;
+	private JLabel col;
+	private JTextField colInput;
+	private JInternalFrame buttons;
+	private JButton make_move;
+public TextFieldInputView (Game g) {
+		this.current_game = g;
 		
-	}
-	
-	public TextFieldInputView () {
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 800);
 		setLocation(10, 10);
 		setLayout(new GridLayout(4, 1));
 		setName("Naughts and Crosses");
 		
-		JInternalFrame game = new JInternalFrame();
+		game = new JInternalFrame();
 		game.setVisible(true);
 		game.setLayout(new BorderLayout(10, 10));
-		JTextArea game_view = new JTextArea();
+		
+		game_view = new JTextArea();
 		game_view.setEditable(false);
 		game_view.setFocusable(false);
 		
 		Font monospace = new Font("Monospaced", Font.PLAIN, 16);
 		
 		game_view.setFont(monospace);
-		//game_view.setText(g.toString());
+		game_view.setText(current_game.toString());
 		game.add(game_view, "Center");
 		
-		JInternalFrame row_stuff = new JInternalFrame();
+		row_stuff = new JInternalFrame();
 		row_stuff.setVisible(true);
 		row_stuff.setLayout(new GridLayout(1, 2));
-		JLabel row = new JLabel("Row:");
-		JTextField rowInput = new JTextField("");
+		row = new JLabel("Row:");
+		rowInput = new JTextField("");
 		row_stuff.add(row);
 		row_stuff.add(rowInput);
 		
-		JInternalFrame col_stuff = new JInternalFrame();
+		col_stuff = new JInternalFrame();
 		col_stuff.setVisible(true);
 		col_stuff.setLayout(new GridLayout(1, 2));
-		JLabel col = new JLabel("Column:");
-		JTextField colInput = new JTextField("");
+		col = new JLabel("Column:");
+		colInput = new JTextField("");
 		col_stuff.add(col);
 		col_stuff.add(colInput);
 		
-		JInternalFrame buttons = new JInternalFrame();
+		buttons = new JInternalFrame();
 		buttons.setVisible(true);
-		JButton makeMove = new JButton("Make your move");
+		make_move = new JButton("Make your move");
 		buttons.setLayout(new BorderLayout(10, 10));
-		buttons.add(makeMove, "Center");
+		buttons.add(make_move, "Center");
 		
 		
 		add(game);
 		add(row_stuff);
 		add(col_stuff);
 		add(buttons);
+	}
+	
+	//		
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

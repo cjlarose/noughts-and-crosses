@@ -5,6 +5,8 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import controller.Controller.GUIListener;
+
 public class DrawingMouseView extends JPanel implements Observer {
 
 	@Override

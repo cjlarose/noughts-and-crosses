@@ -14,6 +14,9 @@ public class MainGUI extends JFrame implements GameView {
 
 	private GUIListener gui_listener; 
 	
+	
+	public MainGUI () {
+	}
 	public void setGlobalListener(GUIListener l) {
 		this.gui_listener = l;
 	}
