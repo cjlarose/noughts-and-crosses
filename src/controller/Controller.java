@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Observer;
-
 import view.*;
 import model.*;
 
@@ -39,7 +37,7 @@ public class Controller {
 	
 	public class GUIListener {
 		public void playerMoved(Player p, int i, int j) {
-			
+			game.makeMove(p, i, j);
 		}
 		
 		public void strategyChanged(Strategy s) {
