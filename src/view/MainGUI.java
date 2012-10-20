@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -101,6 +102,7 @@ public class MainGUI extends JFrame implements GameView {
 		@Override
 		public void menuKeyPressed(MenuKeyEvent arg0) {
 			if (arg0.getSource().equals(beginner)) {
+				System.out.println("GAH");
 				//Change to beginner
 			}
 			
@@ -120,6 +122,7 @@ public class MainGUI extends JFrame implements GameView {
 			}
 			
 			else if (arg0.getSource().equals(text_view_option)) {
+				System.out.println("This should be working");
 				default_view = text_view;
 				default_view.updateUI();
 			}
@@ -127,6 +130,10 @@ public class MainGUI extends JFrame implements GameView {
 			else if (arg0.getSource().equals(graphical_view_option)) {
 				default_view = graphic_view;
 				default_view.updateUI();
+			}
+			else {
+				System.out.println("Why no work");
+				default_view.add(new JTextField("asdf"));
 			}
 			
 		}
