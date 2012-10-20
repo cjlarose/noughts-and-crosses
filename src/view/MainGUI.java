@@ -109,15 +109,24 @@ public class MainGUI extends JFrame implements GameView {
 			}
 			
 			else if (arg0.getSource().equals(new_game)) {
+				//new game (keep current view, unless it is neither
+				//the text view or graphical view, and then start
 				//new game
+				
+				if (!(default_view == text_view || default_view == graphic_view)) {
+					default_view = text_view;
+					default_view.updateUI();
+				}
 			}
 			
 			else if (arg0.getSource().equals(text_view_option)) {
-				//change to textual view
+				default_view = text_view;
+				default_view.updateUI();
 			}
 			
 			else if (arg0.getSource().equals(graphical_view_option)) {
-				//change to graphical view
+				default_view = graphic_view;
+				default_view.updateUI();
 			}
 			
 		}
