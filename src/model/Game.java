@@ -53,7 +53,7 @@ public class Game extends Observable {
 		int move = 1 << index;
 		
 		int all_moves = player1_moves | player2_moves;
-		if ((all_moves ^ move) == 0)
+		if ((all_moves | move) == all_moves)
 			throw new IllegalArgumentException();
 		remaining_moves.remove((Integer)move);
 		if (player == player1) {
@@ -67,7 +67,18 @@ public class Game extends Observable {
 		
 		this.checkFinished();
 		this.setChanged();
-		this.notifyObservers(null);
+		this.notifyObservers(new GameMove(player, i, j));
+	}
+	
+	public class GameMove {
+		public int i;
+		public int j;
+		public Player player;
+		public GameMove(Player p, int i, int j) {
+			this.player = p;
+			this.i = i;
+			this.j = j;
+		}
 	}
 	
 	public LinkedList<Integer> getRemainingMoves() {

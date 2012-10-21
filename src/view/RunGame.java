@@ -30,8 +30,9 @@ public class RunGame implements GameView {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object m) {
 		Game g = (Game) o;
+		Game.GameMove move = (Game.GameMove) m;
 		System.out.println(g.toString());
 		if (g.isFinished()) {
 			System.out.println("FINISHED");
