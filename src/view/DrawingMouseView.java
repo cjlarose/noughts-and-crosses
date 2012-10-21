@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,4 +23,10 @@ public class DrawingMouseView extends JPanel implements Observer {
 		
 	}
 
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D)g;
+
+	}
 }

@@ -18,7 +18,6 @@ public class RunGame implements GameView {
 	
 	public static void main(String[] args) {
 		Controller c = new Controller(new RunGame());
-		
 	}
 	
 	@Override
