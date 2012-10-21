@@ -22,8 +22,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.event.MenuKeyEvent;
-import javax.swing.event.MenuKeyListener;
 
 import model.Game;
 
@@ -64,14 +62,14 @@ public class MainGUI extends JFrame implements GameView {
 		game_menu = new JMenu("Game");
 		change_difficulty = new JMenu("Change Difficulty");
 		beginner = new JMenuItem("Beginner");
-		beginner.addMenuKeyListener(new MenuItemListener());
+		beginner.addActionListener(new MenuItemListener());
 		intermediate = new JMenuItem("Intermediate");
-		intermediate.addMenuKeyListener(new MenuItemListener());
+		intermediate.addActionListener(new MenuItemListener());
 		change_difficulty.add(beginner);
 		change_difficulty.add(intermediate);
 		game_menu.add(change_difficulty);
 		new_game = new JMenuItem("New Game");
-		new_game.addMenuKeyListener(new MenuItemListener());
+		new_game.addActionListener(new MenuItemListener());
 		game_menu.add(new_game);
 		
 		default_view = new JPanel();
@@ -84,9 +82,9 @@ public class MainGUI extends JFrame implements GameView {
 		menu_options.add(game_menu);
 		menu_options.add(change_view);
 		text_view_option = new JMenuItem("Textual View");
-		text_view_option.addMenuKeyListener(new MenuItemListener());
+		text_view_option.addActionListener(new MenuItemListener());
 		graphical_view_option = new JMenuItem("Graphical View");
-		graphical_view_option.addMenuKeyListener(new MenuItemListener());
+		graphical_view_option.addActionListener(new MenuItemListener());
 		change_view.add(text_view_option);
 		change_view.add(graphical_view_option);
 		
@@ -97,10 +95,10 @@ public class MainGUI extends JFrame implements GameView {
 		this.pack();
 	}
 	
-	private class MenuItemListener implements MenuKeyListener {
+	private class MenuItemListener implements ActionListener {
 
 		@Override
-		public void menuKeyPressed(MenuKeyEvent arg0) {
+		public void actionPerformed(AcionEvent arg0 {
 			if (arg0.getSource().equals(beginner)) {
 				System.out.println("GAH");
 				//Change to beginner
@@ -131,22 +129,6 @@ public class MainGUI extends JFrame implements GameView {
 				default_view = graphic_view;
 				default_view.updateUI();
 			}
-			else {
-				System.out.println("Why no work");
-				default_view.add(new JTextField("asdf"));
-			}
-			
-		}
-
-		@Override
-		public void menuKeyReleased(MenuKeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void menuKeyTyped(MenuKeyEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 		
