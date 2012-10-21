@@ -44,10 +44,10 @@ public class MainGUI extends JFrame implements GameView {
 	private JPanel text_view;
 	private JPanel default_view;
 	
-//	public void main(String[] args) {
-//		MainGUI g = new MainGUI();
-//		g.setVisible(true);
-//	}
+	public static void main(String[] args) {
+		MainGUI g = new MainGUI();
+		g.setVisible(true);
+	}
 	
 	public MainGUI() {
 		
@@ -98,7 +98,7 @@ public class MainGUI extends JFrame implements GameView {
 	private class MenuItemListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(AcionEvent arg0 {
+		public void actionPerformed(ActionEvent arg0) {
 			if (arg0.getSource().equals(beginner)) {
 				System.out.println("GAH");
 				//Change to beginner
