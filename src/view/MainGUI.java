@@ -59,17 +59,23 @@ public class MainGUI extends JFrame implements GameView {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout(10, 10));
+		
 		game_menu = new JMenu("Game");
 		change_difficulty = new JMenu("Change Difficulty");
+		
 		beginner = new JMenuItem("Beginner");
 		beginner.addActionListener(new MenuItemListener());
+		
 		intermediate = new JMenuItem("Intermediate");
 		intermediate.addActionListener(new MenuItemListener());
-		change_difficulty.add(beginner);
-		change_difficulty.add(intermediate);
-		game_menu.add(change_difficulty);
+		
 		new_game = new JMenuItem("New Game");
 		new_game.addActionListener(new MenuItemListener());
+		
+		change_difficulty.add(beginner);
+		change_difficulty.add(intermediate);
+		
+		game_menu.add(change_difficulty);
 		game_menu.add(new_game);
 		
 		default_view = new JPanel();
@@ -100,15 +106,17 @@ public class MainGUI extends JFrame implements GameView {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (arg0.getSource().equals(beginner)) {
-				System.out.println("GAH");
+				System.out.println("Beginner mode");
 				//Change to beginner
 			}
 			
 			else if (arg0.getSource().equals(intermediate)) {
+				System.out.println("Intermediate mode");
 				//change to intermediate
 			}
 			
 			else if (arg0.getSource().equals(new_game)) {
+				System.out.println("New game");
 				//new game (keep current view, unless it is neither
 				//the text view or graphical view, and then start
 				//new game
@@ -120,12 +128,17 @@ public class MainGUI extends JFrame implements GameView {
 			}
 			
 			else if (arg0.getSource().equals(text_view_option)) {
-				System.out.println("This should be working");
+				System.out.println("Text view");
+				
+				//Change to textual view
 				default_view = text_view;
 				default_view.updateUI();
 			}
 			
 			else if (arg0.getSource().equals(graphical_view_option)) {
+				System.out.println("Graphical view");
+				
+				//Change to graphical view
 				default_view = graphic_view;
 				default_view.updateUI();
 			}
