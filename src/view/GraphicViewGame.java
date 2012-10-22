@@ -24,13 +24,10 @@ public class GraphicViewGame extends JPanel implements GameView {
 	public static void main(String[] args) {
 	}
 	
-	public GraphicViewGame(Game g) {
-		setSize(400,400);
+	public GraphicViewGame() {
+		setSize(400 ,400);
 		setLocation(0,0);
 		addMouseListener(new MouseClickListener());
-		this.game = g;
-		update(g, null);
-		c = new Controller(this);
 	}
 
 	@Override
@@ -108,5 +105,14 @@ public class GraphicViewGame extends JPanel implements GameView {
 	public void setGlobalListener(GUIListener l) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setGame(Game g) {
+		this.game = g;
+		update(game, null);
+	}
+
+	public void setController(Controller c) {
+		this.c = c;
 	}
 }

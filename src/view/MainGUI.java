@@ -15,8 +15,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import model.Game;
+
 //import model.Game;
 
+import controller.Controller;
 import controller.Controller.GUIListener;
 
 
@@ -35,6 +38,8 @@ public class MainGUI extends JFrame implements GameView {
 	private JPanel graphic_view;
 	private JPanel text_view;
 	private JPanel default_view;
+	private Game g;
+	private Controller c;
 	
 	public static void main(String[] args) {
 		MainGUI g = new MainGUI();
@@ -78,9 +83,9 @@ public class MainGUI extends JFrame implements GameView {
 		this.add(text_view, BorderLayout.CENTER);
 		text_view.setVisible(true);
 		
-		graphic_view = new GraphicViewGame(null);
+		graphic_view = new GraphicViewGame();
 		this.add(graphic_view, BorderLayout.CENTER);
-		graphic_view.setVisible(false);
+		graphic_view.setVisible(true);
 		
 		menu_options = new JMenuBar();
 		change_view = new JMenu("View");
@@ -96,7 +101,9 @@ public class MainGUI extends JFrame implements GameView {
 		change_view.add(text_view_option);
 		change_view.add(graphical_view_option);
 		
-		//this.add(default_view, "Center");
+		default_view = text_view;
+		
+		this.add(default_view, "Center");
 		this.setJMenuBar(menu_options);
 		this.pack();
 	}
@@ -151,7 +158,7 @@ public class MainGUI extends JFrame implements GameView {
 				//Change to graphical view
 				text_view.setVisible(false);
 				graphic_view.setVisible(true);
-				setSize(301,345);
+				//setSize(301,345);
 				
 				default_view = graphic_view;
 				default_view.updateUI();
@@ -170,5 +177,17 @@ public class MainGUI extends JFrame implements GameView {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setGame(Game g) {
+		this.g = g;
+		((TextFieldInputView) text_view).setGame(g);
+		((GraphicViewGame) graphic_view).setGame(g);
+	}
+
+	public void setController(Controller c) {
+		this.c = c;
+		((TextFieldInputView) text_view).setController(c);
+		((GraphicViewGame) graphic_view).setController(c);
 	}
 }

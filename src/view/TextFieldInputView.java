@@ -16,11 +16,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controller.Controller.GUIListener;
-
+import controller.Controller;
 import model.Game;
 
 public class TextFieldInputView extends JPanel implements Observer {
 	private Game current_game;
+	private Controller c;
 	private JPanel game;
 	private JTextArea game_view;
 	private JPanel user_input;
@@ -32,9 +33,8 @@ public class TextFieldInputView extends JPanel implements Observer {
 	private JButton make_move;
 
 	public TextFieldInputView() {
-		// this.current_game = g;
 
-		setSize(500, 800);
+		setSize(380, 360);
 
 		//setLocation(10, 10);
 		setLayout(new BorderLayout(10, 10));
@@ -51,7 +51,6 @@ public class TextFieldInputView extends JPanel implements Observer {
 		Font monospace = new Font("Monospaced", Font.PLAIN, 30);
 		
 		game_view.setFont(monospace);
-		// game_view.setText(current_game.toString());
 		game.add(game_view, "Center");
 
 		user_input = new JPanel();
@@ -77,7 +76,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 		add(game, "North");
 		add(user_input, "Center");
 		add(buttons, "South");
-
+		
 	}
 
 	//
@@ -85,6 +84,15 @@ public class TextFieldInputView extends JPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setGame(Game g) {
+		this.current_game = g;
+		game_view.setText(g.toString());
+	}
+
+	public void setController(Controller c) {
+		this.c = c;
 	}
 
 }
