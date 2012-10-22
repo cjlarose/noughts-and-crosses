@@ -186,5 +186,4 @@ public class Game extends Observable {
 		}
 		return r;
 	}
-
 }

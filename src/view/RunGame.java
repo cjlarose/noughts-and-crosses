@@ -6,6 +6,8 @@ import java.util.Scanner;
 import controller.Controller;
 import controller.Controller.GUIListener;
 
+import model.AIPlayer;
+import model.BeginnerStrategy;
 import model.Game;
 import model.HumanPlayer;
 import model.Player;
@@ -25,7 +27,7 @@ public class RunGame implements GameView {
 		this.listener = l;
 		
 		this.player1 = new HumanPlayer();
-		this.player2 = new HumanPlayer();
+		this.player2 = new AIPlayer(new BeginnerStrategy());
 		this.listener.playersChosen(this.player1, this.player2);
 	}
 

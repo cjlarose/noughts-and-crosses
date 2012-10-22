@@ -15,7 +15,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import model.AIPlayer;
+import model.BeginnerStrategy;
 import model.Game;
+import model.HumanPlayer;
+import model.Player;
 
 //import model.Game;
 
@@ -132,11 +136,14 @@ public class MainGUI extends JFrame implements GameView {
 				//the text view or graphical view, and then start
 				//new game
 				
-				if (!(default_view == text_view || default_view == graphic_view)) {
-					default_view = text_view;
-					default_view.updateUI();
-					packFrame();
-				}
+//				if (!(default_view == text_view || default_view == graphic_view)) {
+//					default_view = text_view;
+//					default_view.updateUI();
+//					packFrame();
+//				}
+				Player player1 = new HumanPlayer();
+				Player player2 = new AIPlayer(new BeginnerStrategy());
+				gui_listener.playersChosen(player1, player2);
 			}
 			
 			else if (arg0.getSource().equals(text_view_option)) {

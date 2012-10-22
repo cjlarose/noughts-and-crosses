@@ -38,10 +38,12 @@ public class GraphicViewGame extends JPanel implements GameView {
 		Player[][] matrix = ((Game) game).toMatrix();
 		
 		for(int i = 0; i < 9; i++) {
-			if(matrix[i][i].equals("X"))
-				drawX(i,i);
-			if(matrix[i][i].equals("O"))
-				drawO(i,i);
+			if (matrix[i/3][i%3] != null) {
+				if(matrix[i/3][i%3].equals("X"))
+					drawX(i/3,i%3);
+				if(matrix[i/3][i%3].equals("O"))
+					drawO(i/3,i%3);
+			}
 		}
 		
 	}
@@ -77,6 +79,7 @@ public class GraphicViewGame extends JPanel implements GameView {
 			
 			try { 
 				c.makeMove(null, i, j);
+				updateUI();
 			}
 			catch(Exception e) {
 				System.out.println("Can't move since we aren't playing an actual game.");
