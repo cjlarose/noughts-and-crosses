@@ -35,6 +35,10 @@ public class Controller {
 		this.view.setGlobalListener(new GUIListener());
 	}
 	
+	public void makeMove(Player p, int i, int j) throws IllegalArgumentException {
+		game.makeMove(p, i, j);
+	}
+	
 	public class GUIListener {
 		public void playerMoved(Player p, int i, int j) {
 			game.makeMove(p, i, j);
@@ -58,6 +62,7 @@ public class Controller {
 			game.addObserver(view);
 			game.start();
 		}
+		
 	}
 	
 }

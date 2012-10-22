@@ -78,9 +78,8 @@ public class MainGUI extends JFrame implements GameView {
 		this.add(text_view, BorderLayout.CENTER);
 		text_view.setVisible(true);
 		
-		graphic_view = new DrawingMouseView();
+		graphic_view = new GraphicViewGame(null);
 		this.add(graphic_view, BorderLayout.CENTER);
-		graphic_view.addMouseListener(new GraphicMouseListener());
 		graphic_view.setVisible(false);
 		
 		menu_options = new JMenuBar();
@@ -102,49 +101,7 @@ public class MainGUI extends JFrame implements GameView {
 		this.pack();
 	}
 	
-	private class GraphicMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			//Only continue if we're in the graphic view	
-			if(!default_view.getClass().equals(DrawingMouseView.class)) {
-				return;
-			}
-			
-			
-			int x = arg0.getX();
-			int y = arg0.getY();
-			
-			int i = x / 100;
-			int j = y / 100;
-			
-			System.out.println(i + " " + j);
-			
-			try { 
-				gui_listener.playerMoved(null, i, j);
-			}
-			catch(Exception e) {
-				System.out.println("Can't move since we aren't playing an actual game.");
-			}
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-		}
-
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-		}
-		
-	}
+	
 	
 	private class MenuItemListener implements ActionListener {
 

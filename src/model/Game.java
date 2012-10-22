@@ -43,7 +43,7 @@ public class Game extends Observable {
 	 * @param i the row coordinate to mark
 	 * @param j the column coordinate to mark
 	 */
-	public void makeMove(Player player, int i, int j) {
+	public void makeMove(Player player, int i, int j) throws IllegalArgumentException {
 		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2) {
 			System.out.println(i + " " + j);
 			throw new IllegalArgumentException();
