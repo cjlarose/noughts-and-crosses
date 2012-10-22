@@ -21,26 +21,26 @@ import model.Game;
 
 public class TextFieldInputView extends JPanel implements Observer {
 	private Game current_game;
-	private JInternalFrame game;
+	private JPanel game;
 	private JTextArea game_view;
-	private JInternalFrame row_stuff;
+	private JPanel user_input;
+	private JPanel buttons;
 	private JLabel row;
 	private JTextField rowInput;
-	private JInternalFrame col_stuff;
 	private JLabel col;
 	private JTextField colInput;
-	private JInternalFrame buttons;
 	private JButton make_move;
 
 	public TextFieldInputView() {
 		// this.current_game = g;
 
 		setSize(500, 800);
-		setLocation(10, 10);
-		setLayout(new GridLayout(4, 1));
-		setName("Naughts and Crosses");
 
-		game = new JInternalFrame();
+		//setLocation(10, 10);
+		setLayout(new BorderLayout(10, 10));
+		//setName("Naughts and Crosses");
+		
+		game = new JPanel();
 		game.setVisible(true);
 		game.setLayout(new BorderLayout(10, 10));
 
@@ -48,38 +48,36 @@ public class TextFieldInputView extends JPanel implements Observer {
 		game_view.setEditable(false);
 		game_view.setFocusable(false);
 
-		Font monospace = new Font("Monospaced", Font.PLAIN, 16);
-
+		Font monospace = new Font("Monospaced", Font.PLAIN, 30);
+		
 		game_view.setFont(monospace);
 		// game_view.setText(current_game.toString());
 		game.add(game_view, "Center");
 
-		row_stuff = new JInternalFrame();
-		row_stuff.setVisible(true);
-		row_stuff.setLayout(new GridLayout(1, 2));
+		user_input = new JPanel();
+		user_input.setVisible(true);
+		user_input.setLayout(new GridLayout(2, 2));
 		row = new JLabel("Row:");
 		rowInput = new JTextField("");
-		row_stuff.add(row);
-		row_stuff.add(rowInput);
-
-		col_stuff = new JInternalFrame();
-		col_stuff.setVisible(true);
-		col_stuff.setLayout(new GridLayout(1, 2));
+		user_input.add(row);
+		user_input.add(rowInput);
+		
 		col = new JLabel("Column:");
 		colInput = new JTextField("");
-		col_stuff.add(col);
-		col_stuff.add(colInput);
+		user_input.add(col);
+		user_input.add(colInput);
+		
+		buttons = new JPanel();
 
-		buttons = new JInternalFrame();
 		buttons.setVisible(true);
 		make_move = new JButton("Make your move");
 		buttons.setLayout(new BorderLayout(10, 10));
 		buttons.add(make_move, "Center");
+		
+		add(game, "North");
+		add(user_input, "Center");
+		add(buttons, "South");
 
-		add(game);
-		add(row_stuff);
-		add(col_stuff);
-		add(buttons);
 	}
 
 	//
