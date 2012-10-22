@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class IntermediateStrategy implements Strategy {
@@ -84,16 +85,13 @@ public class IntermediateStrategy implements Strategy {
 				}
 			}
 		}
+		
 		//Finally: if there is no almost win situation, returns a random valid move. 
-		LinkedList<Integer> remaining_moves = g.getRemainingMoves();
-		Random rand = new Random();
-
-		int i = rand.nextInt(remaining_moves.size());
-		int loc = remaining_moves.get(i);
-		int index = 0;
-		while ((loc >>= 1) != 0)
-			index++;
-		return new int[] { index / 3, index % 3 };
+		Random r = new Random();
+		int i = r.nextInt(9);
+		while (g.isOccupied(i / 3, i % 3))
+			i = (i + 1) % 9;
+		return new int[] {i / 3, i % 3};
 
 	}
 
