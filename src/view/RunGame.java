@@ -48,7 +48,7 @@ public class RunGame implements GameView {
 				// TODO: Remove call to make move
 				g.makeMove(current_player, i, j);
 			} catch(Exception e) {
-				System.out.println("ILLEGAL MOVE, MUTHAFUKKA");
+				System.out.println("ILLEGAL MOVE");
 				this.update(o, null);
 			}
 		}

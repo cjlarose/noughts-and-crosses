@@ -89,7 +89,7 @@ public class MainGUI extends JFrame implements GameView {
 		
 		graphic_view = new GraphicViewGame();
 		this.add(graphic_view, BorderLayout.CENTER);
-		graphic_view.setVisible(true);
+		graphic_view.setVisible(false);
 		
 		menu_options = new JMenuBar();
 		change_view = new JMenu("View");
@@ -152,11 +152,10 @@ public class MainGUI extends JFrame implements GameView {
 				//Change to textual view
 				graphic_view.setVisible(false);
 				text_view.setVisible(true);
-				//setSize(500,800);
+				setSize(400,400);
 				
 				default_view = text_view;
 				default_view.updateUI();
-				packFrame();
 			}
 			
 			else if (arg0.getSource().equals(graphical_view_option)) {
@@ -165,11 +164,10 @@ public class MainGUI extends JFrame implements GameView {
 				//Change to graphical view
 				text_view.setVisible(false);
 				graphic_view.setVisible(true);
-				//setSize(301,345);
+				setSize(301,345);
 				
 				default_view = graphic_view;
 				default_view.updateUI();
-				packFrame();
 			}
 			
 		}
