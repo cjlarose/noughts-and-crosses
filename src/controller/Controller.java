@@ -45,6 +45,10 @@ public class Controller {
 		game = new Game(player1, player2);
 	}
 	
+	public void newGame(Player one, Player two) {
+		game = new Game(one, two);
+	}
+	
 	private void layoutGUI() {
 		g = new MainGUI();
 	}

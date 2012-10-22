@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import controller.Controller;
@@ -9,23 +10,13 @@ import model.Game;
 import model.HumanPlayer;
 import model.Player;
 
-public class RunGame {
+public class RunGame implements Observer {
 	
 	private Player player1;
 	private Player player2;
-	private GUIListener listener;
 	
 	public static void main(String[] args) {
-		Controller c = new Controller(new RunGame());
-	}
-	
-	@Override
-	public void setGlobalListener(GUIListener l) {
-		this.listener = l;
-		
-		this.player1 = new HumanPlayer();
-		this.player2 = new HumanPlayer();
-		this.listener.playersChosen(this.player1, this.player2);
+		Controller c = new Controller();
 	}
 
 	@Override

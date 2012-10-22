@@ -7,7 +7,7 @@ public class Game extends Observable {
 	
 	private Player player1;
 	private Player player2;
-	private final int[] winning_cases;
+	private static final int[] winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
 	private int [] remaining_moves_array;
 	private LinkedList<Integer> remaining_moves;
 	private static final int COMPLETE = 511;
@@ -17,9 +17,12 @@ public class Game extends Observable {
 	private Player current_player;
 	private boolean finished = false;
 	
+	public Game() {
+		
+	}
+	
 	public Game(Player player1, Player player2) {
 		// encode each possible way to win as a bit array
-		this.winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
 		this.player1 = player1;
 		this.player2 = player2;
 		this.current_player = player1;
@@ -34,6 +37,14 @@ public class Game extends Observable {
 	public void start() {
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	public boolean makeMove(int i, int j) throws IllegalArgumentException {
+		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2) {
+			throw new IllegalArgumentException();
+		}
+		
+		return false;
 	}
 	
 	/**
