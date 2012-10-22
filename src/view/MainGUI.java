@@ -2,28 +2,20 @@ package view;
 
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import model.Game;
+//import model.Game;
 
 import controller.Controller.GUIListener;
 
@@ -81,24 +73,77 @@ public class MainGUI extends JFrame implements GameView {
 		default_view = new JPanel();
 		default_view.setSize(100, 100);
 		default_view.setVisible(true);
+		
 		text_view = new TextFieldInputView();
+		this.add(text_view, BorderLayout.CENTER);
+		text_view.setVisible(true);
+		
 		graphic_view = new DrawingMouseView();
+		this.add(graphic_view, BorderLayout.CENTER);
+		graphic_view.addMouseListener(new GraphicMouseListener());
+		graphic_view.setVisible(false);
+		
 		menu_options = new JMenuBar();
 		change_view = new JMenu("View");
 		menu_options.add(game_menu);
 		menu_options.add(change_view);
+		
 		text_view_option = new JMenuItem("Textual View");
 		text_view_option.addActionListener(new MenuItemListener());
+		
 		graphical_view_option = new JMenuItem("Graphical View");
 		graphical_view_option.addActionListener(new MenuItemListener());
+		
 		change_view.add(text_view_option);
 		change_view.add(graphical_view_option);
 		
-//		Container content = this.getContentPane();
-//		content.setLayout(new GridLayout(2, 2, 10, 10));
-		this.add(default_view, "Center");
+		//this.add(default_view, "Center");
 		this.setJMenuBar(menu_options);
 		this.pack();
+	}
+	
+	private class GraphicMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			//Only continue if we're in the graphic view	
+			if(!default_view.getClass().equals(DrawingMouseView.class)) {
+				return;
+			}
+			
+			
+			int x = arg0.getX();
+			int y = arg0.getY();
+			
+			int i = x / 100;
+			int j = y / 100;
+			
+			System.out.println(i + " " + j);
+			
+			try { 
+				gui_listener.playerMoved(null, i, j);
+			}
+			catch(Exception e) {
+				System.out.println("Can't move since we aren't playing an actual game.");
+			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+		}
+		
 	}
 	
 	private class MenuItemListener implements ActionListener {
@@ -131,6 +176,10 @@ public class MainGUI extends JFrame implements GameView {
 				System.out.println("Text view");
 				
 				//Change to textual view
+				graphic_view.setVisible(false);
+				text_view.setVisible(true);
+				//setSize(500,800);
+				
 				default_view = text_view;
 				default_view.updateUI();
 			}
@@ -139,6 +188,10 @@ public class MainGUI extends JFrame implements GameView {
 				System.out.println("Graphical view");
 				
 				//Change to graphical view
+				text_view.setVisible(false);
+				graphic_view.setVisible(true);
+				setSize(301,345);
+				
 				default_view = graphic_view;
 				default_view.updateUI();
 			}

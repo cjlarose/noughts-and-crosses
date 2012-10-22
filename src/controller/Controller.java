@@ -40,6 +40,13 @@ public class Controller {
 			game.makeMove(p, i, j);
 		}
 		
+		public void squareClicked(Player p, int i, int j) throws IllegalArgumentException {
+			if(game.isOccupied(i,j))
+				throw new IllegalArgumentException();
+			else
+				game.makeMove(p, i, j);
+		}
+		
 		public void strategyChanged(Strategy s) {
 			
 		}
