@@ -78,7 +78,7 @@ public class GraphicViewGame extends JPanel implements GameView {
 			System.out.println(i + " " + j);
 			
 			try { 
-				c.makeMove(null, i, j);
+				c.makeMove(game.getCurrentPlayer(), i, j);
 				updateUI();
 			}
 			catch(Exception e) {
