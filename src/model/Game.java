@@ -5,60 +5,29 @@ import java.util.Observable;
 
 public class Game extends Observable {
 	
-	private Player player1;
-	private Player player2;
+	private char currentPlayer = 'X';
+	
 	private static final int[] winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
-	private int [] remaining_moves_array;
-	private LinkedList<Integer> remaining_moves;
+	
+	private int [] remaining_moves_array = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256};
+	private LinkedList<Integer> remaining_moves = new LinkedList<Integer>();
 	private static final int COMPLETE = 511;
 	private int player1_moves;
 	private int player2_moves;
-	private Player winner;
-	private Player current_player;
+	
 	private boolean finished = false;
-	
-	public Game() {
-		
-	}
-	
-	public Game(Player player1, Player player2) {
-		// encode each possible way to win as a bit array
-		this.player1 = player1;
-		this.player2 = player2;
-		this.current_player = player1;
-		this.remaining_moves = new LinkedList<Integer>();
-		this.remaining_moves_array = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256};
-		
+	private char winner = '\0';
+
+	public Game() { 
 		for (int i : remaining_moves_array) {
 			remaining_moves.add(i);
 		}
+		setChanged();
 	}
 	
-	public void start() {
-		this.setChanged();
-		this.notifyObservers();
-	}
-	
-	public boolean makeMove(int i, int j) throws IllegalArgumentException {
-		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2) {
+	public boolean makeMove(int i, int j) {
+		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2) 
 			throw new IllegalArgumentException();
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Mark a move by a player on the game board
-	 * @param player is the player who made the move. Precondition: that player
-	 * is either player1 or player2 that the game was initialized with
-	 * @param i the row coordinate to mark
-	 * @param j the column coordinate to mark
-	 */
-	public void makeMove(Player player, int i, int j) throws IllegalArgumentException {
-		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2) {
-			System.out.println(i + " " + j);
-			throw new IllegalArgumentException();
-		}
 		
 		int index = i * 3 + j;
 		int move = 1 << index;
@@ -66,77 +35,55 @@ public class Game extends Observable {
 		int all_moves = player1_moves | player2_moves;
 		if ((all_moves | move) == all_moves)
 			throw new IllegalArgumentException();
-		remaining_moves.remove((Integer)move);
-		if (player == player1) {
+		
+		if (currentPlayer == 'X') {
 			player1_moves |= move;
-			this.current_player = this.player2;
+			currentPlayer = 'O';
 		}
-		else if (player == player2) {
+		else if (currentPlayer == 'O') {
 			player2_moves |= move;
-			this.current_player = this.player1;
+			currentPlayer = 'X';
 		}
 		
-		this.checkFinished();
-		this.setChanged();
-		this.notifyObservers(new GameMove(player, i, j));
+		isFinished();
+		setChanged();
+		notifyObservers();
+		return true;
 	}
 	
-	public class GameMove {
-		public int i;
-		public int j;
-		public Player player;
-		public GameMove(Player p, int i, int j) {
-			this.player = p;
-			this.i = i;
-			this.j = j;
-		}
+	public char getCurrentPlayer() {
+		return currentPlayer;
 	}
-	
-	public LinkedList<Integer> getRemainingMoves() {
-		return remaining_moves;
-	}
-
-	/**
-	 * Returns whether or not the game is finished
-	 * @return boolean: true if game is finished, false otherwise
-	 */
 
 	public boolean isFinished() {
-		return this.finished;
-	}
-	
-    /**
-     * Check if the game is finished, change this.finished appropriately
-     */
-	public void checkFinished() {
-		if ((player1_moves | player2_moves) == Game.COMPLETE)
-			this.finished = true;
-		for (int i: this.winning_cases) {
+		if ((player1_moves | player2_moves) == COMPLETE)
+			finished = true;
+		for (int i: winning_cases) {
 			if ((player1_moves & i) == i) {
-				this.winner = this.player1;
-				this.finished = true;
+				winner = 'X';
+				finished = true;
 			}
 			else if ((player2_moves & i) == i) {
-				this.winner = this.player2;
-				this.finished = true;
+				winner = 'O';
+				finished = true;
 			}
 		}
+		return finished;
 	}
 	
-    /**
-     * Returns the player who's turn it is
-     * @return Player the current player
-     */
-	public Player getCurrentPlayer() {
-		return this.current_player;
+	public char occupied(int i, int j) {
+		int index = i * 3 + j;
+		int moves = player1_moves >> index;
+		if((moves & 1) == 1)
+			return 'X';
+		
+		moves = player2_moves >> index;
+		if((moves & 1) == 1)
+			return 'O';
+		
+		return '\0';
 	}
 	
-    /**
-     * Checks if an (i, j)-entry is occupied by a move
-     * @param i row coordinate, 0 <= i <= 2
-     * @param j column coordinate, 0 <= j <= 2
-     * @return true if the space is occupied, false otherwise
-     */
 	public boolean isOccupied(int i, int j) {
 		int index = i * 3 + j;
 		int all_moves = this.player1_moves | this.player2_moves;
@@ -145,31 +92,18 @@ public class Game extends Observable {
 		return (all_moves & 1) == 1;
 	}
 	
-    /**
-     * Get the winner of this game (assuming the game is finished)
-     * @return the winner of the game, null if tied
-     */
-	public Player getWinner() {
-		return this.winner;
-	}
-	
-	/**
-	 * @return a 3x3 matrix representing all moves played so far. Contains
-	 * pointers to player objects where appropriate, nulls for blank
-	 * spots
-	 */
-	public Player[][] toMatrix() {
+	public char[][] toMatrix() {
 		int tmp1 = this.player1_moves;
 		int tmp2 = this.player2_moves;
 		
-		Player[][] matrix = new Player[3][3];
+		char[][] matrix = new char[3][3];
 		for (int n = 0; n < 9; n++) {
 			int i = n / 3;
 			int j = n % 3;
 			if ((tmp1 & 1) == 1)
-				matrix[i][j] = this.player1;
+				matrix[i][j] = 'X';
 			else if ((tmp2 & 1) == 1)
-				matrix[i][j] = this.player2;
+				matrix[i][j] = 'O';
 			tmp1 >>= 1;
 			tmp2 >>= 1;
 		}
@@ -177,18 +111,14 @@ public class Game extends Observable {
 		return matrix;
 	}
 	
-    /**
-     * Give a string representation of the board
-     * @return the board as a string of X's and O's
-     */
 	public String toString() {
 		String r = "";
-		Player[][] a = this.toMatrix();
+		char[][] a = toMatrix();
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				if (a[i][j] == this.player1)
+				if (a[i][j] == 'X')
 					r += "X";
-				else if (a[i][j] == this.player2)
+				else if (a[i][j] == 'O')
 					r += "O";
 				else
 					r += "-";
@@ -196,6 +126,10 @@ public class Game extends Observable {
 			r += "\n";
 		}
 		return r;
+	}
+	
+	public char getWinner() {
+		return winner;
 	}
 
 }

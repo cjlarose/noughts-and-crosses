@@ -40,13 +40,25 @@ public class Controller {
 	}
 	
 	public Controller() {
+		/*
 		player1 = new HumanPlayer();
 		player2 = new HumanPlayer();
-		game = new Game(player1, player2);
+		*/
+		game = new Game();
+	}
+	
+	public Controller(Observer toAdd) {
+		game = new Game();
+		game.addObserver(toAdd);
+		game.notifyObservers();
 	}
 	
 	public void newGame(Player one, Player two) {
-		game = new Game(one, two);
+		game = new Game();
+	}
+	
+	public Game getCurrentGame() {
+		return game;
 	}
 	
 	private void layoutGUI() {

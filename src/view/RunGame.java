@@ -7,36 +7,31 @@ import java.util.Scanner;
 import controller.Controller;
 
 import model.Game;
-import model.HumanPlayer;
-import model.Player;
 
 public class RunGame implements Observer {
 	
-	private Player player1;
-	private Player player2;
-	
 	public static void main(String[] args) {
-		Controller c = new Controller();
+		Controller c = new Controller(new RunGame());
 	}
+	
+	public RunGame() {}
 
 	@Override
 	public void update(Observable o, Object m) {
 		Game g = (Game) o;
-		Game.GameMove move = (Game.GameMove) m;
 		System.out.println(g.toString());
 		if (g.isFinished()) {
 			System.out.println("FINISHED");
 		} else {
-			Player current_player = g.getCurrentPlayer();
-			System.out.println(String.format("%c's turn", current_player == player1 ? 'X' : 'O'));
+			char current_player = g.getCurrentPlayer();
+			System.out.println(current_player + "'s turn");
 			Scanner s = new Scanner(System.in);
 			int i = s.nextInt();
 			int j = s.nextInt();
 			try {
-				// TODO: Remove call to make move
-				g.makeMove(current_player, i, j);
+				g.makeMove(i, j);
 			} catch(Exception e) {
-				System.out.println("ILLEGAL MOVE, MUTHAFUKKA");
+				System.out.println("ILLEGAL MOVE");
 				this.update(o, null);
 			}
 		}
