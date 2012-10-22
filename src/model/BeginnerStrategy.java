@@ -11,7 +11,7 @@ public class BeginnerStrategy implements Strategy {
 	 * @return a 2-int array [i,j] with the location of the move
 	 */
 	@Override
-	public int[] getMove(Game g, Player p) {
+	public int[] getMove(Game g, char player) {
 		Random r = new Random();
 		int i = r.nextInt(9);
 		while (g.isOccupied(i / 3, i % 3))

@@ -131,5 +131,9 @@ public class Game extends Observable {
 	public char getWinner() {
 		return winner;
 	}
+	
+	public LinkedList<Integer> getRemainingMoves() {
+		return remaining_moves;
+	}
 
 }
