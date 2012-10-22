@@ -101,7 +101,9 @@ public class MainGUI extends JFrame implements GameView {
 		this.pack();
 	}
 	
-	
+	public void packFrame() {
+		this.pack();	
+	}
 	
 	private class MenuItemListener implements ActionListener {
 
@@ -126,6 +128,7 @@ public class MainGUI extends JFrame implements GameView {
 				if (!(default_view == text_view || default_view == graphic_view)) {
 					default_view = text_view;
 					default_view.updateUI();
+					packFrame();
 				}
 			}
 			
@@ -139,6 +142,7 @@ public class MainGUI extends JFrame implements GameView {
 				
 				default_view = text_view;
 				default_view.updateUI();
+				packFrame();
 			}
 			
 			else if (arg0.getSource().equals(graphical_view_option)) {
@@ -151,6 +155,7 @@ public class MainGUI extends JFrame implements GameView {
 				
 				default_view = graphic_view;
 				default_view.updateUI();
+				packFrame();
 			}
 			
 		}
