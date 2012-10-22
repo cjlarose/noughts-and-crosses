@@ -7,15 +7,13 @@ import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
-import controller.Controller.GUIListener;
 import model.Game;
 import model.Player;
 
-public class GraphicViewGame extends JPanel implements GameView {
+public class GraphicViewGame extends JPanel implements Observer {
 	
 	private Graphics2D g2;
 	private Game game;
@@ -30,7 +28,6 @@ public class GraphicViewGame extends JPanel implements GameView {
 		addMouseListener(new MouseClickListener());
 		this.game = g;
 		update(g, null);
-		c = new Controller(this);
 	}
 
 	@Override
@@ -79,7 +76,7 @@ public class GraphicViewGame extends JPanel implements GameView {
 			System.out.println(i + " " + j);
 			
 			try { 
-				c.makeMove(null, i, j);
+				//makeMove(null, i, j);
 			}
 			catch(Exception e) {
 				System.out.println("Can't move since we aren't playing an actual game.");
@@ -101,12 +98,6 @@ public class GraphicViewGame extends JPanel implements GameView {
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 		}
-		
-	}
-
-	@Override
-	public void setGlobalListener(GUIListener l) {
-		// TODO Auto-generated method stub
 		
 	}
 }

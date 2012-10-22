@@ -4,13 +4,12 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import controller.Controller;
-import controller.Controller.GUIListener;
 
 import model.Game;
 import model.HumanPlayer;
 import model.Player;
 
-public class RunGame implements GameView {
+public class RunGame {
 	
 	private Player player1;
 	private Player player2;

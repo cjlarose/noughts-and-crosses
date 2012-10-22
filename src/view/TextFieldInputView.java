@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controller.Controller.GUIListener;
-
 import model.Game;
 
 public class TextFieldInputView extends JPanel implements Observer {
