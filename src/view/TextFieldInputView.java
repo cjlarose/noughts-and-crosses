@@ -83,14 +83,14 @@ public class TextFieldInputView extends JPanel implements Observer {
 			this.add(new JLabel("Row:"));
 			rowInput = new JTextField();
 			rowInput.setPreferredSize(new Dimension(30, 20));
-			rowInput.addKeyListener(new EnterKeyListener());
+			rowInput.addActionListener(new EnterKeyListener());
 			this.add(rowInput);
 
 			// column
 			this.add(new JLabel("Column:"));
 			colInput = new JTextField();
 			colInput.setPreferredSize(new Dimension(30, 20));
-			colInput.addKeyListener(new EnterKeyListener());
+			colInput.addActionListener(new EnterKeyListener());
 			this.add(colInput);
 
 			// Make move button
@@ -117,27 +117,15 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 		}
 
-		public class EnterKeyListener implements KeyListener {
+		public class EnterKeyListener implements ActionListener {
 
 			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!(colInput.getText().equals("") || rowInput.getText()
-							.equals(""))) {
-						System.out.println("Key pressed");
-						makeMove();
-					}
+			public void actionPerformed(ActionEvent e) {
+				if (!(colInput.getText().equals("") || rowInput.getText()
+						.equals(""))) {
+					System.out.println("Key pressed");
+					makeMove();
 				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				//throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				//throw new UnsupportedOperationException();
 			}
 
 		}
