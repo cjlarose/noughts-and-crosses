@@ -1,6 +1,5 @@
 package model;
 
-import java.util.LinkedList;
 import java.util.Observable;
 
 public class Game extends Observable {
@@ -8,9 +7,6 @@ public class Game extends Observable {
 	private char currentPlayer = 'X';
 	
 	private static final int[] winning_cases = new int[] {448, 56, 7, 292, 146, 73, 273, 84};
-	
-	private int [] remaining_moves_array = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256};
-	private LinkedList<Integer> remaining_moves = new LinkedList<Integer>();
 	private static final int COMPLETE = 511;
 	private int player1_moves;
 	private int player2_moves;
@@ -19,9 +15,6 @@ public class Game extends Observable {
 	private char winner = '\0';
 
 	public Game() { 
-		for (int i : remaining_moves_array) {
-			remaining_moves.add(i);
-		}
 		setChanged();
 		// This will NOT call any Observer's update methods, since you can't add
 		// an Observer until you have initialized the game. Call
@@ -138,10 +131,6 @@ public class Game extends Observable {
 	
 	public char getWinner() {
 		return winner;
-	}
-	
-	public LinkedList<Integer> getRemainingMoves() {
-		return remaining_moves;
 	}
 
 }
