@@ -47,7 +47,7 @@ public class Controller {
 		game.notifyObservers();
 	}
 	
-	public void newGame(Player one, Player two) {
+	public void newGame() {
 		game = new Game();
 	}
 	
@@ -80,6 +80,8 @@ public class Controller {
 		private JPanel text_view;
 		private JPanel default_view;
 		
+		private Controller c;
+		
 		public MainGUI() {
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +92,8 @@ public class Controller {
 			this.setResizable(false);
 			this.setVisible(true);
 			this.setLayout(new BorderLayout(10, 10));
+			
+			c = new Controller(this);
 			
 			game_menu = new JMenu("Game");
 			change_difficulty = new JMenu("Change Difficulty");
@@ -160,8 +164,8 @@ public class Controller {
 					//the text view or graphical view, and then start
 					//new game
 					
-					game = new Game();
-					game.addObserver((Observer) this);
+					c.newGame();
+					graphic_view.repaint();
 					game.addObserver((Observer) graphic_view);
 					game.addObserver((Observer) text_view);
 				}
@@ -172,7 +176,7 @@ public class Controller {
 					//Change to textual view
 					graphic_view.setVisible(false);
 					text_view.setVisible(true);
-					//setSize(500,800);
+					setSize(400,400);
 					
 					default_view = text_view;
 					default_view.updateUI();

@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -26,12 +28,15 @@ public class TextFieldInputView extends JPanel implements Observer {
 	private Controller c;
 
 	public TextFieldInputView() {
-		
+
 		this.c = new Controller(this);
 
+		setSize(400, 340);
+
+		// setLocation(10, 10);
 		setSize(400, 300);
 		setLayout(new BorderLayout(10, 10));
-		
+
 		// board container
 		game = new JPanel();
 		game.setVisible(true);
@@ -44,59 +49,96 @@ public class TextFieldInputView extends JPanel implements Observer {
 		game_view.setFocusable(false);
 
 		Font monospace = new Font("Monospaced", Font.PLAIN, 30);
-		
+
 		game_view.setFont(monospace);
 		game.add(game_view, "Center");
-		
+
 		this.user_input = new ControlsContainer();
-		
+
 		add(game, "North");
 		add(user_input, "Center");
-		
+
 	}
-	
+
 	public class ControlsContainer extends JPanel {
-		
+
 		private JPanel buttons;
 		private JLabel row;
 		private JTextField rowInput;
 		private JLabel col;
 		private JTextField colInput;
 		private JButton make_move;
-		
+
 		public ControlsContainer() {
 			// controls container
 			this.setVisible(true);
 			this.setLayout(new FlowLayout());
-			
+
 			// row
 			this.add(new JLabel("Row:"));
 			rowInput = new JTextField();
 			rowInput.setPreferredSize(new Dimension(30, 20));
+			rowInput.addKeyListener(new EnterKeyListener());
 			this.add(rowInput);
-			
+
 			// column
 			this.add(new JLabel("Column:"));
 			colInput = new JTextField();
 			colInput.setPreferredSize(new Dimension(30, 20));
+			colInput.addKeyListener(new EnterKeyListener());
 			this.add(colInput);
-			
+
 			// Make move button
 			make_move = new JButton("Make your move");
 			make_move.addActionListener(new MoveButtonListener());
 			this.add(make_move);
 		}
+
+		private void makeMove() {
+			int i = Integer.parseInt(rowInput.getText());
+			int j = Integer.parseInt(colInput.getText());
+			colInput.setText("");
+			rowInput.setText("");
+			c.makeMove(i, j);
+		}
 		
 		public class MoveButtonListener implements ActionListener {
-	
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Clicked");
-				int i = Integer.parseInt(rowInput.getText());
-				int j = Integer.parseInt(colInput.getText());
-				c.makeMove(i, j);
+				makeMove();
 			}
-			
+
+		}
+
+		public class EnterKeyListener implements KeyListener {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (!(colInput.getText().equals("") || rowInput.getText()
+							.equals(""))) {
+						System.out.println("Key pressed");
+						makeMove();
+					}
+
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
 		}
 	}
 
