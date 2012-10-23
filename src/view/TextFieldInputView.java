@@ -3,23 +3,22 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controller.Controller;
 import model.Game;
 
+import controller.Controller;
+
 public class TextFieldInputView extends JPanel implements Observer {
-	private Game current_game;
 	private JPanel game;
 	private JTextArea game_view;
 	private JPanel user_input;
@@ -29,20 +28,29 @@ public class TextFieldInputView extends JPanel implements Observer {
 	private JLabel col;
 	private JTextField colInput;
 	private JButton make_move;
+	private Controller c;
 
 	public TextFieldInputView() {
+		
+		this.c = new Controller(this);
 
-		setSize(500, 800);
+<<<<<<< HEAD
+		setSize(400, 340);
 
 		//setLocation(10, 10);
+=======
+		setSize(400, 300);
+>>>>>>> 807e2e5b20b62e3e84feb4c8165958e21d20bbd7
 		setLayout(new BorderLayout(10, 10));
-		//setName("Naughts and Crosses");
 		
+		// board container
 		game = new JPanel();
 		game.setVisible(true);
 		game.setLayout(new BorderLayout(10, 10));
 
+		// board.
 		game_view = new JTextArea();
+		game_view.setText(c.getCurrentGame().toString());
 		game_view.setEditable(false);
 		game_view.setFocusable(false);
 
@@ -51,23 +59,28 @@ public class TextFieldInputView extends JPanel implements Observer {
 		game_view.setFont(monospace);
 		game.add(game_view, "Center");
 
+		// controls container
 		user_input = new JPanel();
 		user_input.setVisible(true);
 		user_input.setLayout(new GridLayout(2, 2));
+		
+		// row
 		row = new JLabel("Row:");
 		rowInput = new JTextField("");
 		user_input.add(row);
 		user_input.add(rowInput);
 		
+		// column
 		col = new JLabel("Column:");
 		colInput = new JTextField("");
 		user_input.add(col);
 		user_input.add(colInput);
 		
+		// Make move button
 		buttons = new JPanel();
-
 		buttons.setVisible(true);
 		make_move = new JButton("Make your move");
+		make_move.addActionListener(new MoveButtonListener());
 		buttons.setLayout(new BorderLayout(10, 10));
 		buttons.add(make_move, "Center");
 		
@@ -76,12 +89,25 @@ public class TextFieldInputView extends JPanel implements Observer {
 		add(buttons, "South");
 		
 	}
+	
+	public class MoveButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.out.println("Clicked");
+			int i = Integer.parseInt(colInput.getText());
+			int j = Integer.parseInt(rowInput.getText());
+			c.makeMove(i, j);
+		}
+		
+	}
 
 	//
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-
+	public void update(Observable obj, Object arg1) {
+		Game g = (Game) obj;
+		if (this.game_view != null)
+			this.game_view.setText(g.toString());
 	}
 
 }

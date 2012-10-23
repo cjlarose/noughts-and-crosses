@@ -176,7 +176,7 @@ public class Controller {
 					//Change to textual view
 					graphic_view.setVisible(false);
 					text_view.setVisible(true);
-					//setSize(500,800);
+					setSize(400,400);
 					
 					default_view = text_view;
 					default_view.updateUI();
