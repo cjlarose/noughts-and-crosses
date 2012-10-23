@@ -34,13 +34,10 @@ public class TextFieldInputView extends JPanel implements Observer {
 		
 		this.c = new Controller(this);
 
-<<<<<<< HEAD
 		setSize(400, 340);
 
 		//setLocation(10, 10);
-=======
 		setSize(400, 300);
->>>>>>> 807e2e5b20b62e3e84feb4c8165958e21d20bbd7
 		setLayout(new BorderLayout(10, 10));
 		
 		// board container
