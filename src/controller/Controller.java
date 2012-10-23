@@ -51,6 +51,10 @@ public class Controller {
 		game = new Game();
 	}
 	
+	public void makeMove(int i, int j) {
+		game.makeMove(i, j);
+	}
+	
 	public Game getCurrentGame() {
 		return game;
 	}
@@ -113,7 +117,7 @@ public class Controller {
 			this.add(text_view, BorderLayout.CENTER);
 			text_view.setVisible(true);
 			
-			graphic_view = new GraphicViewGame(null);
+			graphic_view = new GraphicViewGame();
 			this.add(graphic_view, BorderLayout.CENTER);
 			graphic_view.setVisible(false);
 			
@@ -156,10 +160,10 @@ public class Controller {
 					//the text view or graphical view, and then start
 					//new game
 					
-					if (!(default_view == text_view || default_view == graphic_view)) {
-						default_view = text_view;
-						default_view.updateUI();
-					}
+					game = new Game();
+					game.addObserver((Observer) this);
+					game.addObserver((Observer) graphic_view);
+					game.addObserver((Observer) text_view);
 				}
 				
 				else if (arg0.getSource().equals(text_view_option)) {

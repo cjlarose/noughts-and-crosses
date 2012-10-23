@@ -117,12 +117,10 @@ public class Game extends Observable {
 		char[][] a = toMatrix();
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				if (a[i][j] == 'X')
-					r += "X";
-				else if (a[i][j] == 'O')
-					r += "O";
-				else
+				if (a[i][j] == '\0')
 					r += "-";
+				else 
+					r += a[i][j];
 			}
 			r += "\n";
 		}
