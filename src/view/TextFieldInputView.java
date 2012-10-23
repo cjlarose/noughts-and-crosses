@@ -32,7 +32,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 	public TextFieldInputView() {
 
-		setSize(500, 800);
+		setSize(400, 340);
 
 		//setLocation(10, 10);
 		setLayout(new BorderLayout(10, 10));
