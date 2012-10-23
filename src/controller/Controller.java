@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -67,10 +68,10 @@ public class Controller {
 		private JMenu change_view;
 		private JMenu change_difficulty;
 		private JMenu game_menu;
-		private JMenuItem text_view_option;
-		private JMenuItem graphical_view_option;
-		private JMenuItem beginner;
-		private JMenuItem intermediate;
+		private JCheckBoxMenuItem text_view_option;
+		private JCheckBoxMenuItem graphical_view_option;
+		private JCheckBoxMenuItem beginner;
+		private JCheckBoxMenuItem intermediate;
 		private JMenuItem new_game;
 		private JPanel graphic_view;
 		private JPanel text_view;
@@ -94,10 +95,11 @@ public class Controller {
 			game_menu = new JMenu("Game");
 			change_difficulty = new JMenu("Change Difficulty");
 			
-			beginner = new JMenuItem("Beginner");
+			beginner = new JCheckBoxMenuItem("Beginner");
+			beginner.setState(true);
 			beginner.addActionListener(new MenuItemListener());
 			
-			intermediate = new JMenuItem("Intermediate");
+			intermediate = new JCheckBoxMenuItem("Intermediate");
 			intermediate.addActionListener(new MenuItemListener());
 			
 			new_game = new JMenuItem("New Game");
@@ -128,10 +130,11 @@ public class Controller {
 			menu_options.add(game_menu);
 			menu_options.add(change_view);
 			
-			text_view_option = new JMenuItem("Textual View");
+			text_view_option = new JCheckBoxMenuItem("Textual View");
+			text_view_option.setState(true);
 			text_view_option.addActionListener(new MenuItemListener());
 			
-			graphical_view_option = new JMenuItem("Graphical View");
+			graphical_view_option = new JCheckBoxMenuItem("Graphical View");
 			graphical_view_option.addActionListener(new MenuItemListener());
 			
 			change_view.add(text_view_option);
@@ -148,11 +151,15 @@ public class Controller {
 			public void actionPerformed(ActionEvent arg0) {
 				if (arg0.getSource().equals(beginner)) {
 					System.out.println("Beginner mode");
+					beginner.setState(true);
+					intermediate.setState(false);
 					//Change to beginner
 				}
 				
 				else if (arg0.getSource().equals(intermediate)) {
 					System.out.println("Intermediate mode");
+					beginner.setState(false);
+					intermediate.setState(true);
 					//change to intermediate
 				}
 				
@@ -172,6 +179,9 @@ public class Controller {
 				else if (arg0.getSource().equals(text_view_option)) {
 					System.out.println("Text view");
 					
+					text_view_option.setState(true);
+					graphical_view_option.setState(false);
+					
 					//Change to textual view
 					graphic_view.setVisible(false);
 					text_view.setVisible(true);
@@ -183,6 +193,9 @@ public class Controller {
 				
 				else if (arg0.getSource().equals(graphical_view_option)) {
 					System.out.println("Graphical view");
+					
+					text_view_option.setState(false);
+					graphical_view_option.setState(true);
 					
 					//Change to graphical view
 					text_view.setVisible(false);
