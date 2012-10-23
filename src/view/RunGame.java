@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import controller.Controller;
 
-import model.AIPlayer;
-import model.BeginnerStrategy;
 import model.Game;
 
 public class RunGame implements Observer {
