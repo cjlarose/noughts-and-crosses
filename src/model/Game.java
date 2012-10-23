@@ -52,6 +52,10 @@ public class Game extends Observable {
 		return true;
 	}
 	
+	public boolean makeMove(int[] move) {
+		return this.makeMove(move[0], move[1]);
+	}
+	
 	public char getCurrentPlayer() {
 		return currentPlayer;
 	}

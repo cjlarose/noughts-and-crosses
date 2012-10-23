@@ -53,10 +53,8 @@ public class Controller {
 	
 	public void makeMove(int i, int j) {
 		game.makeMove(i, j);
-		if (!game.isFinished()) {
-			int[] move = opponent.getMove(game);
-			game.makeMove(move[0], move[1]);
-		}
+		if (!game.isFinished())
+			game.makeMove(opponent.getMove(game));
 	}
 	
 	public Game getCurrentGame() {
