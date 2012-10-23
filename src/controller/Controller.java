@@ -66,6 +66,10 @@ public class Controller {
 		game.addObserver(g);
 	}
 	
+	public MainGUI getMainGUI() {
+		return g;
+	}
+	
 	public class MainGUI extends JFrame implements Observer {
 		 
 		private JMenuBar menu_options;
@@ -175,11 +179,7 @@ public class Controller {
 					//the text view or graphical view, and then start
 					//new game
 					
-					c.newGame();
-					c.getCurrentGame().addObserver((Observer) graphic_view);
-					c.getCurrentGame().addObserver((Observer) text_view);
-					graphic_view.repaint();
-					c.getCurrentGame().notifyObservers("New game");
+					newGame();
 				}
 				
 				else if (arg0.getSource().equals(text_view_option)) {
@@ -218,6 +218,14 @@ public class Controller {
 		
 		public void update(Observable o, Object arg) {
 			
+		}
+		
+		public void newGame() {
+			c.newGame();
+			c.getCurrentGame().addObserver((Observer) graphic_view);
+			c.getCurrentGame().addObserver((Observer) text_view);
+			graphic_view.repaint();
+			c.getCurrentGame().notifyObservers("New game");
 		}
 	}
 }
