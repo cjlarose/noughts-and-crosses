@@ -160,10 +160,10 @@ public class Controller {
 					//the text view or graphical view, and then start
 					//new game
 					
-					if (!(default_view == text_view || default_view == graphic_view)) {
-						default_view = text_view;
-						default_view.updateUI();
-					}
+					game = new Game();
+					game.addObserver((Observer) this);
+					game.addObserver((Observer) graphic_view);
+					game.addObserver((Observer) text_view);
 				}
 				
 				else if (arg0.getSource().equals(text_view_option)) {
