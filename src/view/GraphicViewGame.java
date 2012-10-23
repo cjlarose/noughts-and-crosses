@@ -11,8 +11,6 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 
-import model.Game;
-
 public class GraphicViewGame extends JPanel implements Observer {
 	
 	private Graphics2D g2;
@@ -86,7 +84,6 @@ public class GraphicViewGame extends JPanel implements Observer {
 			}
 			catch(Exception e) {
 				return;
-				//e.printStackTrace();
 			}
 		}
 
