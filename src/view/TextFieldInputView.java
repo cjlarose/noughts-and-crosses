@@ -84,14 +84,5 @@ public class TextFieldInputView extends JPanel implements Observer {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void setGame(Game g) {
-		this.current_game = g;
-		game_view.setText(g.toString());
-	}
-
-	public void setController(Controller c) {
-		this.c = c;
-	}
 
 }
