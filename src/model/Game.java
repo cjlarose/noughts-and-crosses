@@ -23,6 +23,9 @@ public class Game extends Observable {
 			remaining_moves.add(i);
 		}
 		setChanged();
+		// This will NOT call any Observer's update methods, since you can't add
+		// an Observer until you have initialized the game. Call
+		// Game.notifyObservers() from wherever you instantiate it
 	}
 	
 	public boolean makeMove(int i, int j) {
@@ -48,9 +51,11 @@ public class Game extends Observable {
 			currentPlayer = 'X';
 		}
 		
-		isFinished();
+		String result = "";
+		if(isFinished())
+			result = winner + " wins";	
 		setChanged();
-		notifyObservers();
+		notifyObservers(result);
 		return true;
 	}
 	

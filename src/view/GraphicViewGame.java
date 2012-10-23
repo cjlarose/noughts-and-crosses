@@ -19,9 +19,6 @@ public class GraphicViewGame extends JPanel implements Observer {
 	private Game game;
 	private Controller c;
 	
-	public static void main(String[] args) {
-	}
-	
 	public GraphicViewGame(Game g) {
 		setSize(400,400);
 		setLocation(0,0);
@@ -35,12 +32,12 @@ public class GraphicViewGame extends JPanel implements Observer {
 		if(game == null)
 			return;
 		
-		Player[][] matrix = ((Game) game).toMatrix();
+		char[][] matrix = ((Game) game).toMatrix();
 		
 		for(int i = 0; i < 9; i++) {
-			if(matrix[i][i].equals("X"))
+			if(matrix[i][i] == 'X')
 				drawX(i,i);
-			if(matrix[i][i].equals("O"))
+			else if(matrix[i][i] == 'O')
 				drawO(i,i);
 		}
 		
