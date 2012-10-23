@@ -9,7 +9,9 @@ public class RunTournament implements Observer {
 	int intermediate_wins = 0;
 	int ties = 0;
 	Player beginner_player;
+	char beginner_player_char;
 	Player intermediate_player;
+	char intermediate_player_char;
 	public static final int num_games = 1000;
 
 	/**
@@ -25,11 +27,15 @@ public class RunTournament implements Observer {
 		rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
 		
 		System.out.println("Result of playing "+num_games+" games when beginner goes first:");
+		rt.beginner_player_char = 'X';
+		rt.intermediate_player_char = 'O';
 		rt.playTournament(rt.beginner_player, rt.intermediate_player);
 		
 		System.out.println();
 		
 		System.out.println("Result of playing "+num_games+" games when intermediate goes first:");
+		rt.beginner_player_char = 'O';
+		rt.intermediate_player_char = 'X';
 		rt.playTournament(rt.intermediate_player, rt.beginner_player);
 	}
 	
@@ -39,9 +45,8 @@ public class RunTournament implements Observer {
 	 * @param player2 player to go second
 	 */
 	private void playTournament(Player player1, Player player2) {
-
 		for (int i = 0; i < num_games; i++) {
-			Game g = new Game(player1, player2);
+			Game g = new Game();
 			g.addObserver(this);
 			this.update(g, null);
 		}
@@ -64,19 +69,29 @@ public class RunTournament implements Observer {
 	@Override
 	public void update(Observable game, Object arg) {
 		if (((Game) game).isFinished()) {
-			Player winner = ((Game) game).getWinner();
+			char winner = ((Game) game).getWinner();
 			//System.out.println(game.toString());
-			if (winner == null)
+			if (winner == '\0')
 				this.ties++;
-			else if (winner == beginner_player)
+			else if (winner == beginner_player_char)
 				this.beginner_wins++;
-			else if (winner == intermediate_player)
+			else if (winner == intermediate_player_char)
 				this.intermediate_wins++;
 		} else {
-			Player current_player = ((Game) game).getCurrentPlayer();
-			int[] move = ((AIPlayer) current_player).getMove((Game) game);
+			char current_player_char = ((Game) game).getCurrentPlayer();
+			int[] move;
+			if(current_player_char == beginner_player_char)
+				move = ((AIPlayer) beginner_player).getMove((Game) game);
+			else move = ((AIPlayer) intermediate_player).getMove((Game) game);
 			//System.out.println(game.toString());
-			((Game) game).makeMove(current_player, move[0], move[1]);
+			try {
+				((Game) game).makeMove(move[0], move[1]);
+			} catch (Exception E) {
+				if(current_player_char == beginner_player_char)
+					System.out.println("beginner");
+				else System.out.println("intermediate");
+				System.exit(-1);
+			}
 		}
 	}
 

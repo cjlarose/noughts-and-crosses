@@ -11,6 +11,7 @@ import model.Game;
 public class RunGame implements Observer {
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		Controller c = new Controller(new RunGame());
 	}
 	

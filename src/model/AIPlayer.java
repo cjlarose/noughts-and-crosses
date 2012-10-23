@@ -23,7 +23,7 @@ public class AIPlayer implements Player {
 	 */
 	@Override
 	public int[] getMove(Game g) {
-		return this.strategy.getMove(g, this);
+		return strategy.getMove(g, g.getCurrentPlayer());
 	}
 	
 }
