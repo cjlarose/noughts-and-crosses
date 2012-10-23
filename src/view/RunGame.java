@@ -1,52 +1,38 @@
 package view;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import controller.Controller;
-import controller.Controller.GUIListener;
 
 import model.AIPlayer;
 import model.BeginnerStrategy;
 import model.Game;
-import model.HumanPlayer;
-import model.Player;
 
-public class RunGame implements GameView {
-	
-	private Player player1;
-	private Player player2;
-	private GUIListener listener;
+public class RunGame implements Observer {
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		Controller c = new Controller(new RunGame());
 	}
 	
-	@Override
-	public void setGlobalListener(GUIListener l) {
-		this.listener = l;
-		
-		this.player1 = new HumanPlayer();
-		this.player2 = new AIPlayer(new BeginnerStrategy());
-		this.listener.playersChosen(this.player1, this.player2);
-	}
+	public RunGame() {}
 
 	@Override
 	public void update(Observable o, Object m) {
 		Game g = (Game) o;
-		Game.GameMove move = (Game.GameMove) m;
 		System.out.println(g.toString());
 		if (g.isFinished()) {
 			System.out.println("FINISHED");
 		} else {
-			Player current_player = g.getCurrentPlayer();
-			System.out.println(String.format("%c's turn", current_player == player1 ? 'X' : 'O'));
+			char current_player = g.getCurrentPlayer();
+			System.out.println(current_player + "'s turn");
 			Scanner s = new Scanner(System.in);
 			int i = s.nextInt();
 			int j = s.nextInt();
 			try {
-				// TODO: Remove call to make move
-				g.makeMove(current_player, i, j);
+				g.makeMove(i, j);
 			} catch(Exception e) {
 				System.out.println("ILLEGAL MOVE");
 				this.update(o, null);

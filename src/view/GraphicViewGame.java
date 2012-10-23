@@ -7,27 +7,24 @@ import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
-import controller.Controller.GUIListener;
 import model.Game;
 import model.Player;
 
-public class GraphicViewGame extends JPanel implements GameView {
+public class GraphicViewGame extends JPanel implements Observer {
 	
 	private Graphics2D g2;
 	private Game game;
 	private Controller c;
 	
-	public static void main(String[] args) {
-	}
-	
-	public GraphicViewGame() {
-		setSize(400 ,400);
+	public GraphicViewGame(Game g) {
+		setSize(400,400);
 		setLocation(0,0);
 		addMouseListener(new MouseClickListener());
+		this.game = g;
+		update(g, null);
 	}
 
 	@Override
@@ -35,15 +32,13 @@ public class GraphicViewGame extends JPanel implements GameView {
 		if(game == null)
 			return;
 		
-		Player[][] matrix = ((Game) game).toMatrix();
+		char[][] matrix = ((Game) game).toMatrix();
 		
 		for(int i = 0; i < 9; i++) {
-			if (matrix[i/3][i%3] != null) {
-				if(matrix[i/3][i%3].equals("X"))
-					drawX(i/3,i%3);
-				if(matrix[i/3][i%3].equals("O"))
-					drawO(i/3,i%3);
-			}
+			if(matrix[i][i] == 'X')
+				drawX(i,i);
+			else if(matrix[i][i] == 'O')
+				drawO(i,i);
 		}
 		
 	}
@@ -78,8 +73,7 @@ public class GraphicViewGame extends JPanel implements GameView {
 			System.out.println(i + " " + j);
 			
 			try { 
-				c.makeMove(game.getCurrentPlayer(), i, j);
-				updateUI();
+				//makeMove(null, i, j);
 			}
 			catch(Exception e) {
 				System.out.println("Can't move since we aren't playing an actual game.");
@@ -102,20 +96,5 @@ public class GraphicViewGame extends JPanel implements GameView {
 		public void mouseReleased(MouseEvent arg0) {
 		}
 		
-	}
-
-	@Override
-	public void setGlobalListener(GUIListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setGame(Game g) {
-		this.game = g;
-		update(game, null);
-	}
-
-	public void setController(Controller c) {
-		this.c = c;
 	}
 }

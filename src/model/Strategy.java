@@ -2,6 +2,6 @@ package model;
 
 public interface Strategy {
 
-	public int[] getMove(Game g, Player p);
+	public int[] getMove(Game g, char player);
 	
 }

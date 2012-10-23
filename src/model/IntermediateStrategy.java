@@ -27,18 +27,18 @@ public class IntermediateStrategy implements Strategy {
 	 * @ param p The current player. The AIPlayer, in the case of this class.
 	 */
 	@Override
-	public int[] getMove(Game g, Player p) {
+	public int[] getMove(Game g, char player) {
 		int computer_moves = 0;
 		int player_moves = 0;
 		int temp_one = 1;
 		//Building the lists of computer and player moves, as the original method
 		//cannot differentiate
-		Player[][] board = g.toMatrix();
+		char[][] board = g.toMatrix();
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				int index = i * 3 + j;
-				if (board[i][j] != null) {
-					if (board[i][j].equals(p))
+				if (board[i][j] != '\0') {
+					if (board[i][j] == player)
 						computer_moves |= temp_one << index;
 					else
 						player_moves |= temp_one << index;
