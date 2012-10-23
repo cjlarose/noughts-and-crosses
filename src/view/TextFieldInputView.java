@@ -62,10 +62,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 	public class ControlsContainer extends JPanel {
 
-		private JPanel buttons;
-		private JLabel row;
 		private JTextField rowInput;
-		private JLabel col;
 		private JTextField colInput;
 		private JButton make_move;
 
@@ -122,21 +119,18 @@ public class TextFieldInputView extends JPanel implements Observer {
 						System.out.println("Key pressed");
 						makeMove();
 					}
-
 				}
-
 			}
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
+				throw new UnsupportedOperationException();
 
 			}
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-
+				throw new UnsupportedOperationException();
 			}
 
 		}
