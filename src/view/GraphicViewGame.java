@@ -87,18 +87,17 @@ public class GraphicViewGame extends JPanel implements Observer {
 				Game curr = c.getCurrentGame();
 				if (curr.isFinished()) {
 					int input;
-					if (curr.getWinner() == 'X') {
+					if (curr.getWinner() == 'X') 
 						input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
-					}
-					else {
+					else if (curr.getWinner() == 'O') 
 						input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
-					}
-					if (input == JOptionPane.YES_OPTION) {
+					else 
+						input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
+					
+					if (input == JOptionPane.YES_OPTION) 
 						c.getMainGUI().newGame();
-					}
-					else {
+					else 
 						System.exit(0);
-					}
 				}
 			}
 			catch(IllegalArgumentException e) {
