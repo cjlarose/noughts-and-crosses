@@ -15,11 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-<<<<<<< HEAD
-import controller.Controller.GUIListener;
 import controller.Controller;
-=======
->>>>>>> rework
 import model.Game;
 
 public class TextFieldInputView extends JPanel implements Observer {
