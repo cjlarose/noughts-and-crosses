@@ -16,6 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import model.Game;
 
@@ -23,7 +27,7 @@ import controller.Controller;
 
 public class TextFieldInputView extends JPanel implements Observer {
 	private JPanel game;
-	private JTextArea game_view;
+	private JTextPane game_view;
 	private JPanel user_input;
 	private Controller c;
 
@@ -43,7 +47,11 @@ public class TextFieldInputView extends JPanel implements Observer {
 		game.setLayout(new BorderLayout(10, 10));
 
 		// board.
-		game_view = new JTextArea();
+		game_view = new JTextPane();
+		StyledDocument doc = game_view.getStyledDocument();
+		SimpleAttributeSet center = new SimpleAttributeSet();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		game_view.setText(c.getCurrentGame().toString());
 		game_view.setEditable(false);
 		game_view.setFocusable(false);
