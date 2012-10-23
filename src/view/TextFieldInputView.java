@@ -13,6 +13,7 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -105,7 +106,11 @@ public class TextFieldInputView extends JPanel implements Observer {
 			colInput.setText("");
 			rowInput.setText("");
 			rowInput.requestFocus();
-			c.makeMove(i, j);
+			try {
+				c.makeMove(i, j);
+			} catch (IllegalArgumentException e) {
+				JOptionPane.showMessageDialog(null, "You've made an illegal move", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
 		public class MoveButtonListener implements ActionListener {
