@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -65,12 +67,14 @@ public class TextFieldInputView extends JPanel implements Observer {
 		row = new JLabel("Row:");
 		rowInput = new JTextField("");
 		user_input.add(row);
+		rowInput.addKeyListener(new EnterKeyListener());
 		user_input.add(rowInput);
 		
 		// column
 		col = new JLabel("Column:");
 		colInput = new JTextField("");
 		user_input.add(col);
+		colInput.addKeyListener(new EnterKeyListener());
 		user_input.add(colInput);
 		
 		// Make move button
@@ -94,7 +98,41 @@ public class TextFieldInputView extends JPanel implements Observer {
 			System.out.println("Clicked");
 			int i = Integer.parseInt(colInput.getText());
 			int j = Integer.parseInt(rowInput.getText());
+			colInput.setText("");
+			rowInput.setText("");
 			c.makeMove(i, j);
+		}
+		
+	}
+	
+	public class EnterKeyListener implements KeyListener {
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (!(colInput.getText().equals("") || rowInput.getText().equals(""))) {
+					System.out.println("Key pressed");
+					int i = Integer.parseInt(colInput.getText());
+					int j = Integer.parseInt(rowInput.getText());
+					colInput.setText("");
+					rowInput.setText("");
+					c.makeMove(i, j);
+				}
+					
+			}
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}
