@@ -104,6 +104,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 			int j = Integer.parseInt(colInput.getText());
 			colInput.setText("");
 			rowInput.setText("");
+			rowInput.requestFocus();
 			c.makeMove(i, j);
 		}
 		
