@@ -81,7 +81,7 @@ public class Controller {
 		public MainGUI(Controller controller) {
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			this.setTitle("Naughts and Crosses");
+			this.setTitle("Noughts and Crosses");
 			this.setSize(400,400);
 			this.setPreferredSize(new Dimension(400, 400));
 			this.setLocation(100,100);
