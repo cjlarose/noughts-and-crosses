@@ -20,7 +20,6 @@ import model.Game;
 
 public class TextFieldInputView extends JPanel implements Observer {
 	private Game current_game;
-	private Controller c;
 	private JPanel game;
 	private JTextArea game_view;
 	private JPanel user_input;
@@ -33,7 +32,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 	public TextFieldInputView() {
 
-		setSize(380, 360);
+		setSize(500, 800);
 
 		//setLocation(10, 10);
 		setLayout(new BorderLayout(10, 10));
