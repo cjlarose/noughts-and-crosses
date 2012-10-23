@@ -6,16 +6,18 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import model.Game;
 
@@ -23,12 +25,14 @@ import controller.Controller;
 
 public class TextFieldInputView extends JPanel implements Observer {
 	private JPanel game;
-	private JTextArea game_view;
+	private JTextPane game_view;
 	private JPanel user_input;
 	private Controller c;
 
+	/**
+	 * Creates a new text field input view with a game board and input controls.
+	 */
 	public TextFieldInputView(Controller c) {
-
 		this.c = c;
 
 		setSize(400, 340);
@@ -43,12 +47,16 @@ public class TextFieldInputView extends JPanel implements Observer {
 		game.setLayout(new BorderLayout(10, 10));
 
 		// board.
-		game_view = new JTextArea();
+		game_view = new JTextPane();
+		StyledDocument doc = game_view.getStyledDocument();
+		SimpleAttributeSet center = new SimpleAttributeSet();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		game_view.setText(c.getCurrentGame().toString());
 		game_view.setEditable(false);
 		game_view.setFocusable(false);
 
-		Font monospace = new Font("Monospaced", Font.PLAIN, 30);
+		Font monospace = new Font("Monospaced", Font.PLAIN, 70);
 
 		game_view.setFont(monospace);
 		game.add(game_view, "Center");
@@ -60,6 +68,9 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * JPanel containing the row and column input boxes and a button to move
+	 */
 	public class ControlsContainer extends JPanel {
 
 		private JTextField rowInput;
@@ -75,14 +86,14 @@ public class TextFieldInputView extends JPanel implements Observer {
 			this.add(new JLabel("Row:"));
 			rowInput = new JTextField();
 			rowInput.setPreferredSize(new Dimension(30, 20));
-			rowInput.addKeyListener(new EnterKeyListener());
+			rowInput.addActionListener(new EnterKeyListener());
 			this.add(rowInput);
 
 			// column
 			this.add(new JLabel("Column:"));
 			colInput = new JTextField();
 			colInput.setPreferredSize(new Dimension(30, 20));
-			colInput.addKeyListener(new EnterKeyListener());
+			colInput.addActionListener(new EnterKeyListener());
 			this.add(colInput);
 
 			// Make move button
@@ -91,51 +102,53 @@ public class TextFieldInputView extends JPanel implements Observer {
 			this.add(make_move);
 		}
 
+		/**
+		 * Reads the values in the input boxes and make the corresponding move on the game.
+		 */
 		private void makeMove() {
 			int i = Integer.parseInt(rowInput.getText());
 			int j = Integer.parseInt(colInput.getText());
 			colInput.setText("");
 			rowInput.setText("");
-			c.makeMove(i, j);
+			rowInput.requestFocus();
+			try {
+				c.makeMove(i, j);
+			} catch (IllegalArgumentException e) {
+				JOptionPane.showMessageDialog(null, "You've made an illegal move", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
+		/**
+		 * Listener for clicking the "move" button
+		 */
 		public class MoveButtonListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Clicked");
 				makeMove();
 			}
 
 		}
 
-		public class EnterKeyListener implements KeyListener {
+		/**
+		 * Listener for pressing "enter" in a text input field
+		 */
+		public class EnterKeyListener implements ActionListener {
 
 			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!(colInput.getText().equals("") || rowInput.getText()
-							.equals(""))) {
-						System.out.println("Key pressed");
-						makeMove();
-					}
+			public void actionPerformed(ActionEvent e) {
+				if (!(colInput.getText().equals("") || rowInput.getText()
+						.equals(""))) {
+					makeMove();
 				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				//throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				//throw new UnsupportedOperationException();
 			}
 
 		}
 	}
 
-	//
+	/**
+	 * Update the game board when the game has changed
+	 */
 	@Override
 	public void update(Observable obj, Object arg1) {
 		Game g = (Game) obj;

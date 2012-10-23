@@ -124,7 +124,7 @@ public class Game extends Observable {
 			}
 			r += "\n";
 		}
-		return r;
+		return r.substring(0, r.length() - 1);
 	}
 	
 	public char getWinner() {
