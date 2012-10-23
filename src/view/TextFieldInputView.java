@@ -22,7 +22,6 @@ import controller.Controller;
 public class TextFieldInputView extends JPanel implements Observer {
 	private JPanel game;
 	private JTextArea game_view;
-	private JButton make_move;
 	private JPanel user_input;
 	private Controller c;
 
@@ -63,6 +62,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 		private JTextField rowInput;
 		private JLabel col;
 		private JTextField colInput;
+		private JButton make_move;
 		
 		public ControlsContainer() {
 			// controls container
@@ -70,27 +70,21 @@ public class TextFieldInputView extends JPanel implements Observer {
 			this.setLayout(new FlowLayout());
 			
 			// row
-			row = new JLabel("Row:");
+			this.add(new JLabel("Row:"));
 			rowInput = new JTextField();
 			rowInput.setPreferredSize(new Dimension(30, 20));
-			this.add(row);
 			this.add(rowInput);
 			
 			// column
-			col = new JLabel("Column:");
+			this.add(new JLabel("Column:"));
 			colInput = new JTextField();
 			colInput.setPreferredSize(new Dimension(30, 20));
-			this.add(col);
 			this.add(colInput);
 			
 			// Make move button
-			buttons = new JPanel();
-			buttons.setVisible(true);
 			make_move = new JButton("Make your move");
 			make_move.addActionListener(new MoveButtonListener());
-			buttons.setLayout(new BorderLayout(10, 10));
-			buttons.add(make_move, "Center");
-			this.add(buttons);
+			this.add(make_move);
 		}
 		
 		public class MoveButtonListener implements ActionListener {
@@ -98,8 +92,8 @@ public class TextFieldInputView extends JPanel implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Clicked");
-				int i = Integer.parseInt(colInput.getText());
-				int j = Integer.parseInt(rowInput.getText());
+				int i = Integer.parseInt(rowInput.getText());
+				int j = Integer.parseInt(colInput.getText());
 				c.makeMove(i, j);
 			}
 			
