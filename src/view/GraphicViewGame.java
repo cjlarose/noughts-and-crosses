@@ -11,20 +11,15 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 import model.Game;
-import model.Player;
 
 public class GraphicViewGame extends JPanel implements Observer {
 	
 	private Graphics2D g2;
-	private Game game;
-	private Controller c;
 	
-	public GraphicViewGame(Game g) {
+	public GraphicViewGame() {
 		setSize(400,400);
 		setLocation(0,0);
 		addMouseListener(new MouseClickListener());
-		this.game = g;
-		update(g, null);
 	}
 
 	@Override

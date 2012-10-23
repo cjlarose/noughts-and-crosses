@@ -51,6 +51,10 @@ public class Controller {
 		game = new Game();
 	}
 	
+	public void makeMove(int i, int j) {
+		game.makeMove(i, j);
+	}
+	
 	public Game getCurrentGame() {
 		return game;
 	}
@@ -113,7 +117,7 @@ public class Controller {
 			this.add(text_view, BorderLayout.CENTER);
 			text_view.setVisible(true);
 			
-			graphic_view = new GraphicViewGame(null);
+			graphic_view = new GraphicViewGame();
 			this.add(graphic_view, BorderLayout.CENTER);
 			graphic_view.setVisible(false);
 			
