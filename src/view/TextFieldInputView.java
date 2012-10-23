@@ -6,8 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
@@ -32,6 +29,9 @@ public class TextFieldInputView extends JPanel implements Observer {
 	private JPanel user_input;
 	private Controller c;
 
+	/**
+	 * Creates a new text field input view with a game board and input controls.
+	 */
 	public TextFieldInputView() {
 
 		this.c = new Controller(this);
@@ -69,6 +69,9 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * JPanel containing the row and column input boxes and a button to move
+	 */
 	public class ControlsContainer extends JPanel {
 
 		private JTextField rowInput;
@@ -100,6 +103,9 @@ public class TextFieldInputView extends JPanel implements Observer {
 			this.add(make_move);
 		}
 
+		/**
+		 * Reads the values in the input boxes and make the corresponding move on the game.
+		 */
 		private void makeMove() {
 			int i = Integer.parseInt(rowInput.getText());
 			int j = Integer.parseInt(colInput.getText());
@@ -113,23 +119,27 @@ public class TextFieldInputView extends JPanel implements Observer {
 			}
 		}
 		
+		/**
+		 * Listener for clicking the "move" button
+		 */
 		public class MoveButtonListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Clicked");
 				makeMove();
 			}
 
 		}
 
+		/**
+		 * Listener for pressing "enter" in a text input field
+		 */
 		public class EnterKeyListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!(colInput.getText().equals("") || rowInput.getText()
 						.equals(""))) {
-					System.out.println("Key pressed");
 					makeMove();
 				}
 			}
@@ -137,7 +147,9 @@ public class TextFieldInputView extends JPanel implements Observer {
 		}
 	}
 
-	//
+	/**
+	 * Update the game board when the game has changed
+	 */
 	@Override
 	public void update(Observable obj, Object arg1) {
 		Game g = (Game) obj;
