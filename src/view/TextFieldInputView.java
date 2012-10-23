@@ -124,13 +124,12 @@ public class TextFieldInputView extends JPanel implements Observer {
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				throw new UnsupportedOperationException();
-
+				//throw new UnsupportedOperationException();
 			}
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				throw new UnsupportedOperationException();
+				//throw new UnsupportedOperationException();
 			}
 
 		}
