@@ -41,14 +41,11 @@ public class Controller {
 		game = new Game();
 	}
 	
-	public Controller(Observer toAdd) {
-		game = new Game();
-		game.addObserver(toAdd);
-		game.notifyObservers();
-	}
-	
 	public void newGame() {
+		game.deleteObservers();
 		game = new Game();
+		game.addObserver(g);
+		game.notifyObservers("New game");
 	}
 	
 	public void makeMove(int i, int j) {
@@ -60,9 +57,8 @@ public class Controller {
 	}
 	
 	private void layoutGUI() {
-		g = new MainGUI();
+		g = new MainGUI(this);
 		game.addObserver(g);
-		game.notifyObservers();
 	}
 	
 	public class MainGUI extends JFrame implements Observer {
@@ -82,7 +78,7 @@ public class Controller {
 		
 		private Controller c;
 		
-		public MainGUI() {
+		public MainGUI(Controller controller) {
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setTitle("Naughts and Crosses");
@@ -93,7 +89,7 @@ public class Controller {
 			this.setVisible(true);
 			this.setLayout(new BorderLayout(10, 10));
 			
-			c = new Controller(this);
+			c = controller;
 			
 			game_menu = new JMenu("Game");
 			change_difficulty = new JMenu("Change Difficulty");
@@ -117,11 +113,13 @@ public class Controller {
 			default_view.setSize(100, 100);
 			default_view.setVisible(true);
 			
-			text_view = new TextFieldInputView();
+			text_view = new TextFieldInputView(c);
+			c.getCurrentGame().addObserver((Observer) text_view);
 			this.add(text_view, BorderLayout.CENTER);
 			text_view.setVisible(true);
 			
-			graphic_view = new GraphicViewGame();
+			graphic_view = new GraphicViewGame(c);
+			c.getCurrentGame().addObserver((Observer) graphic_view);
 			this.add(graphic_view, BorderLayout.CENTER);
 			graphic_view.setVisible(false);
 			
@@ -165,9 +163,10 @@ public class Controller {
 					//new game
 					
 					c.newGame();
+					c.getCurrentGame().addObserver((Observer) graphic_view);
+					c.getCurrentGame().addObserver((Observer) text_view);
 					graphic_view.repaint();
-					game.addObserver((Observer) graphic_view);
-					game.addObserver((Observer) text_view);
+					c.getCurrentGame().notifyObservers("New game");
 				}
 				
 				else if (arg0.getSource().equals(text_view_option)) {

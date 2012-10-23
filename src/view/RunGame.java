@@ -11,8 +11,10 @@ import model.Game;
 public class RunGame implements Observer {
 	
 	public static void main(String[] args) {
-		@SuppressWarnings("unused")
-		Controller c = new Controller(new RunGame());
+		Controller c = new Controller();
+		RunGame r = new RunGame();
+		c.getCurrentGame().addObserver(r);
+		r.update(c.getCurrentGame(), null);
 	}
 	
 	public RunGame() {}

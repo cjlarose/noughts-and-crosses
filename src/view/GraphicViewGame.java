@@ -16,11 +16,11 @@ public class GraphicViewGame extends JPanel implements Observer {
 	private Graphics2D g2;
 	private Controller c;
 	
-	public GraphicViewGame() {
+	public GraphicViewGame(Controller c) {
 		setSize(400,400);
 		setLocation(0,0);
 		addMouseListener(new MouseClickListener());
-		c = new Controller(this);
+		this.c = c;
 	}
 
 	@Override

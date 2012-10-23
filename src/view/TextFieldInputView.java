@@ -27,9 +27,9 @@ public class TextFieldInputView extends JPanel implements Observer {
 	private JPanel user_input;
 	private Controller c;
 
-	public TextFieldInputView() {
+	public TextFieldInputView(Controller c) {
 
-		this.c = new Controller(this);
+		this.c = c;
 
 		setSize(400, 340);
 
