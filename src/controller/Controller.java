@@ -29,6 +29,7 @@ public class Controller {
 
 	private Game game;
 	private MainGUI g;
+	private AIPlayer opponent;
 	
 	/**
 	 * Running this class uses the default MainGUI
@@ -40,6 +41,7 @@ public class Controller {
 	
 	public Controller() {
 		game = new Game();
+		opponent = new AIPlayer(new BeginnerStrategy());
 	}
 	
 	public void newGame() {
@@ -51,6 +53,8 @@ public class Controller {
 	
 	public void makeMove(int i, int j) {
 		game.makeMove(i, j);
+		int[] move = opponent.getMove(game);
+		game.makeMove(move[0], move[1]);
 	}
 	
 	public Game getCurrentGame() {
