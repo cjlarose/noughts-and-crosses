@@ -27,8 +27,6 @@ import model.*;
 public class Controller {
 
 	private Game game;
-	private Player player1;
-	private Player player2;
 	private MainGUI g;
 	
 	/**
@@ -40,10 +38,6 @@ public class Controller {
 	}
 	
 	public Controller() {
-		/*
-		player1 = new HumanPlayer();
-		player2 = new HumanPlayer();
-		*/
 		game = new Game();
 	}
 	
@@ -63,6 +57,8 @@ public class Controller {
 	
 	private void layoutGUI() {
 		g = new MainGUI();
+		game.addObserver(g);
+		game.notifyObservers();
 	}
 	
 	public class MainGUI extends JFrame implements Observer {
@@ -139,8 +135,6 @@ public class Controller {
 			this.setJMenuBar(menu_options);
 			this.pack();
 		}
-		
-		
 		
 		private class MenuItemListener implements ActionListener {
 
