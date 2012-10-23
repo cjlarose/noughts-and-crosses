@@ -56,7 +56,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 		game_view.setEditable(false);
 		game_view.setFocusable(false);
 
-		Font monospace = new Font("Monospaced", Font.PLAIN, 30);
+		Font monospace = new Font("Monospaced", Font.PLAIN, 70);
 
 		game_view.setFont(monospace);
 		game.add(game_view, "Center");
