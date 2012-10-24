@@ -113,21 +113,6 @@ public class TextFieldInputView extends JPanel implements Observer {
 			rowInput.requestFocus();
 			try {
 				c.makeMove(i, j);
-				Game curr = c.getCurrentGame();
-				if (curr.isFinished()) {
-					int input;
-					if (curr.getWinner() == 'X') 
-						input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
-					else if (curr.getWinner() == 'O') 
-						input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
-					else 
-						input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
-					
-					if (input == JOptionPane.YES_OPTION) 
-						c.getMainGUI().newGame();
-					else 
-						System.exit(0);
-				}
 			} catch (IllegalArgumentException e) {
 				JOptionPane.showMessageDialog(null, "You've made an illegal move", "Error", JOptionPane.ERROR_MESSAGE);
 			}

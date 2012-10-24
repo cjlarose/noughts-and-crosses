@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.*;
@@ -64,10 +65,6 @@ public class Controller {
 	private void layoutGUI() {
 		g = new MainGUI(this);
 		game.addObserver(g);
-	}
-	
-	public MainGUI getMainGUI() {
-		return g;
 	}
 	
 	public class MainGUI extends JFrame implements Observer {
@@ -217,7 +214,21 @@ public class Controller {
 		}
 		
 		public void update(Observable o, Object arg) {
-			
+			Game curr = (Game) o;
+			if (curr.isFinished()) {
+				int input;
+				if (curr.getWinner() == 'X') 
+					input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
+				else if (curr.getWinner() == 'O') 
+					input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
+				else 
+					input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
+				
+				if (input == JOptionPane.YES_OPTION) 
+					this.newGame();
+				else 
+					System.exit(0);
+			}
 		}
 		
 		public void newGame() {
