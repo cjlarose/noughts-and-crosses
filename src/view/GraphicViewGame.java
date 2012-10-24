@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -60,11 +62,15 @@ public class GraphicViewGame extends JPanel implements Observer {
 	}
 	
 	private void drawX(int i, int j, Graphics g) {
-		((Graphics2D) g).drawString("X", (j*100)+10, (i*100)+10);
+		Line2D.Double line = new Line2D.Double(j*100, i*100, (j+1)*100, (i+1)*100);
+		((Graphics2D) g).draw(line);
+		line = new Line2D.Double((j+1)*100, i*100, j*100, (i+1)*100);
+		((Graphics2D) g).draw(line);
 	}
 	
 	private void drawO(int i, int j, Graphics g) {
-		((Graphics2D) g).drawString("O", (j*100)+10, (i*100)+10);
+		Ellipse2D.Double circle = new Ellipse2D.Double((j*100)+5,(i*100)+5,90,90);
+		((Graphics2D) g).draw(circle);
 	}
 	
 	private class MouseClickListener implements MouseListener {
