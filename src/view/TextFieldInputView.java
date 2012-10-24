@@ -114,7 +114,6 @@ public class TextFieldInputView extends JPanel implements Observer {
 			try {
 				c.makeMove(i, j);
 			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(null, "You've made an illegal move", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		

@@ -53,9 +53,13 @@ public class Controller {
 	}
 	
 	public void makeMove(int i, int j) {
-		game.makeMove(i, j);
-		if (!game.isFinished())
-			game.makeMove(opponent.getMove(game));
+		try {
+			game.makeMove(i, j);
+			if (!game.isFinished())
+				game.makeMove(opponent.getMove(game));
+		} catch (IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "You've made an illegal move", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	public Game getCurrentGame() {

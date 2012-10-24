@@ -82,12 +82,7 @@ public class GraphicViewGame extends JPanel implements Observer {
 			
 			System.out.println(i + " " + j);
 			
-			try { 
-				c.makeMove(i, j);
-			}
-			catch(IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(null, "You've made an illegal move", "Error", JOptionPane.ERROR_MESSAGE);;
-			}
+			c.makeMove(i, j);
 		}
 
 		@Override
