@@ -63,11 +63,11 @@ public class GraphicViewGame extends JPanel implements Observer {
 	}
 	
 	private void drawX(int i, int j, Graphics g) {
-		((Graphics2D) g).drawString("X", (i*100)+10, (j*100)+10);
+		((Graphics2D) g).drawString("X", (j*100)+10, (i*100)+10);
 	}
 	
 	private void drawO(int i, int j, Graphics g) {
-		((Graphics2D) g).drawString("O", (i*100)+10, (j*100)+10);
+		((Graphics2D) g).drawString("O", (j*100)+10, (i*100)+10);
 	}
 	
 	private class MouseClickListener implements MouseListener {
