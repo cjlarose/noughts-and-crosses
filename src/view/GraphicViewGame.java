@@ -77,8 +77,8 @@ public class GraphicViewGame extends JPanel implements Observer {
 			int x = arg0.getX();
 			int y = arg0.getY();
 			
-			int i = x / 100;
-			int j = y / 100;
+			int j = x / 100;
+			int i = y / 100;
 			
 			System.out.println(i + " " + j);
 			
