@@ -7,10 +7,7 @@ import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import model.Game;
 
 import controller.Controller;
 
