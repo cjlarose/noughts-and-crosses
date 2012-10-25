@@ -23,8 +23,8 @@ public class RunTournament implements Observer {
 	public static void main(String[] args) {
 		RunTournament rt = new RunTournament();
 		
-		rt.beginner_player = new AIPlayer(new BeginnerStrategy());
-		rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
+		rt.beginner_player = new Player(new BeginnerStrategy());
+		rt.intermediate_player = new Player(new IntermediateStrategy());
 		
 		System.out.println("Result of playing "+num_games+" games when beginner goes first:");
 		rt.beginner_player_char = 'X';
@@ -81,17 +81,10 @@ public class RunTournament implements Observer {
 			char current_player_char = ((Game) game).getCurrentPlayer();
 			int[] move;
 			if(current_player_char == beginner_player_char)
-				move = ((AIPlayer) beginner_player).getMove((Game) game);
-			else move = ((AIPlayer) intermediate_player).getMove((Game) game);
+				move = beginner_player.getMove((Game) game);
+			else move = intermediate_player.getMove((Game) game);
 			//System.out.println(game.toString());
-			try {
-				((Game) game).makeMove(move[0], move[1]);
-			} catch (Exception E) {
-				if(current_player_char == beginner_player_char)
-					System.out.println("beginner");
-				else System.out.println("intermediate");
-				System.exit(-1);
-			}
+			((Game) game).makeMove(move[0], move[1]);
 		}
 	}
 
