@@ -219,8 +219,11 @@ public class Controller {
 		
 		public void update(Observable o, Object arg) {
 			Game curr = (Game) o;
-			Thread my_thread = new Thread(new DialogThread(curr));
-			my_thread.start();
+			System.out.println("Game is finished");
+			if (curr.isFinished()) {
+				Thread my_thread = new Thread(new DialogThread(curr));
+				my_thread.start();
+			}
 		}
 		
 		public class DialogThread implements Runnable {
@@ -232,20 +235,18 @@ public class Controller {
 
 			@Override
 			public void run() {
-				if (this.g.isFinished()) {
-					int input;
-					if (this.g.getWinner() == 'X') 
-						input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
-					else if (this.g.getWinner() == 'O') 
-						input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
-					else 
-						input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
-					
-					if (input == JOptionPane.YES_OPTION) 
-						newGame();
-					else 
-						System.exit(0);
-				}
+				int input;
+				if (this.g.getWinner() == 'X') 
+					input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
+				else if (this.g.getWinner() == 'O') 
+					input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
+				else 
+					input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
+				
+				if (input == JOptionPane.YES_OPTION) 
+					newGame();
+				else 
+					System.exit(0);
 			}
 			
 		}
