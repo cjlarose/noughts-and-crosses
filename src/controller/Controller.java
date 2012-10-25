@@ -45,7 +45,7 @@ public class Controller {
 	 */
 	public Controller() {
 		game = new Game();
-		opponent = new AIPlayer(new BeginnerStrategy());
+		opponent = new Player(new BeginnerStrategy());
 	}
 
 	/**

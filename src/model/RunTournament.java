@@ -25,8 +25,8 @@ public class RunTournament implements Observer {
 	public static void main(String[] args) {
 		RunTournament rt = new RunTournament();
 
-		rt.beginner_player = new AIPlayer(new BeginnerStrategy());
-		rt.intermediate_player = new AIPlayer(new IntermediateStrategy());
+		rt.beginner_player = new Player(new BeginnerStrategy());
+		rt.intermediate_player = new Player(new IntermediateStrategy());
 
 		System.out.println("Result of playing " + num_games
 				+ " games when beginner goes first:");
