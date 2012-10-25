@@ -7,3 +7,5 @@ Grader: Rohit Umashankar (rohitu)
 * Reid Knight (knightr)
 * Chris La Rose (cjlarose)
 * Tanner Prynn (tpyrnn)
+
+To start the Main GUI, run Contoller.java
