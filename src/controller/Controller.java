@@ -30,7 +30,7 @@ public class Controller {
 
 	private Game game;
 	private MainGUI g;
-	private AIPlayer opponent;
+	private Player opponent;
 	
 	/**
 	 * Running this class uses the default MainGUI
@@ -42,7 +42,7 @@ public class Controller {
 	
 	public Controller() {
 		game = new Game();
-		opponent = new AIPlayer(new BeginnerStrategy());
+		opponent = new Player(new BeginnerStrategy());
 	}
 	
 	public void newGame() {
@@ -162,7 +162,7 @@ public class Controller {
 					System.out.println("Beginner mode");
 					beginner.setState(true);
 					intermediate.setState(false);
-					opponent = new AIPlayer(new BeginnerStrategy());
+					opponent = new Player(new BeginnerStrategy());
 					//Change to beginner
 				}
 				
@@ -170,7 +170,7 @@ public class Controller {
 					System.out.println("Intermediate mode");
 					beginner.setState(false);
 					intermediate.setState(true);
-					opponent = new AIPlayer(new IntermediateStrategy());
+					opponent = new Player(new IntermediateStrategy());
 					//change to intermediate
 				}
 				
