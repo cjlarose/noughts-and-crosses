@@ -49,7 +49,7 @@ public class Controller {
 		game.deleteObservers();
 		game = new Game();
 		game.addObserver(g);
-		game.notifyObservers("New game");
+		//game.notifyObservers("New game");
 	}
 	
 	public void makeMove(int i, int j) {
@@ -219,20 +219,35 @@ public class Controller {
 		
 		public void update(Observable o, Object arg) {
 			Game curr = (Game) o;
-			if (curr.isFinished()) {
-				int input;
-				if (curr.getWinner() == 'X') 
-					input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
-				else if (curr.getWinner() == 'O') 
-					input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
-				else 
-					input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
-				
-				if (input == JOptionPane.YES_OPTION) 
-					this.newGame();
-				else 
-					System.exit(0);
+			Thread my_thread = new Thread(new DialogThread(curr));
+			my_thread.start();
+		}
+		
+		public class DialogThread implements Runnable {
+			
+			Game g;
+			public DialogThread(Game g) {
+				this.g = g;
 			}
+
+			@Override
+			public void run() {
+				if (this.g.isFinished()) {
+					int input;
+					if (this.g.getWinner() == 'X') 
+						input = JOptionPane.showConfirmDialog(null, "You Win! Start a new game?", "Game Over", JOptionPane.YES_NO_OPTION);
+					else if (this.g.getWinner() == 'O') 
+						input = JOptionPane.showConfirmDialog(null, "You lose! Try again?", "Game Over", JOptionPane.YES_NO_OPTION);
+					else 
+						input = JOptionPane.showConfirmDialog(null, "It's a draw. Another round?", "Game Over", JOptionPane.YES_NO_OPTION);
+					
+					if (input == JOptionPane.YES_OPTION) 
+						newGame();
+					else 
+						System.exit(0);
+				}
+			}
+			
 		}
 		
 		public void newGame() {
