@@ -16,8 +16,8 @@ public class Game extends Observable {
 	private char winner = '\0';
 
 	/**
-	 * A Game is a playable game of Naughts & Crosses, AKA Tic-Tac-Toe.
-	 * Internally, the game is represented as one integer, since my teammates
+	 * A Game is a playable game of Noughts & Crosses, AKA Tic-Tac-Toe.
+	 * Internally, the game is represented as two bit vectors, since my teammates
 	 * are masochists. Using bit logic, we can decide which numbers represent
 	 * winning games, complete games, and individual player's moves.
 	 */
@@ -35,7 +35,9 @@ public class Game extends Observable {
 	 *             if the game is finished, the spot is out of bounds, or the
 	 *             spot is occupied
 	 * @param i
+	 *            the row coordinate
 	 * @param j
+	 *            the column coordinate
 	 */
 	public void makeMove(int i, int j) {
 		if (this.finished || j < 0 || j > 2 || i < 0 || i > 2)
@@ -91,7 +93,7 @@ public class Game extends Observable {
 	/**
 	 * Check if the game is complete.
 	 * 
-	 * @return true if the game is finished
+	 * @return true if the game is finished, false otherwise
 	 */
 	public boolean isFinished() {
 		if ((player1_moves | player2_moves) == COMPLETE) {
@@ -111,9 +113,13 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * @return the character that occupies the given spot
+	 * Returns the player who occupies a space
+	 * 
 	 * @param i
+	 *            the row coordinate
 	 * @param j
+	 *            the column coordinate
+	 * @return the character that occupies the given spot
 	 */
 	public char occupiedBy(int i, int j) {
 		int index = i * 3 + j;
@@ -129,9 +135,13 @@ public class Game extends Observable {
 	}
 
 	/**
+	 * Tests to see if a space is occupied
+	 * 
 	 * @param i
+	 *            the row coordinate
 	 * @param j
-	 * @return true if the given spot is occupied
+	 *            the column coordinate
+	 * @return true if the given spot is occupied, false otherwise
 	 */
 	public boolean isOccupied(int i, int j) {
 		int index = i * 3 + j;
@@ -188,6 +198,7 @@ public class Game extends Observable {
 
 	/**
 	 * Return the character that has won the game.
+	 * 
 	 * @return 'X', 'O', or '\0' if there is no winner
 	 */
 	public char getWinner() {
