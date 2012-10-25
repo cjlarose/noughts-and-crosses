@@ -76,7 +76,7 @@ public class Game extends Observable {
 		return finished;
 	}
 	
-	public char occupied(int i, int j) {
+	public char occupiedBy(int i, int j) {
 		int index = i * 3 + j;
 		int moves = player1_moves >> index;
 		if((moves & 1) == 1)
