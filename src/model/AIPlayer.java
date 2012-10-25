@@ -16,6 +16,10 @@ public class AIPlayer implements Player {
 		this.strategy = s;
 	}
 	
+	public Strategy getStrategy() {
+		return strategy;
+	}
+	
 	/**
 	 * Given the context of a game, use the current strategy to determine the next move
 	 * @param g the game to respond to
