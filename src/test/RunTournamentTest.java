@@ -8,7 +8,7 @@ public class RunTournamentTest {
 
 	@Test
 	public void testRunTournament() {
-		RunTournament r = new RunTournament();
+		RunTournament.main(null);
 	}
 
 }

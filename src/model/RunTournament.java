@@ -84,14 +84,7 @@ public class RunTournament implements Observer {
 				move = beginner_player.getMove((Game) game);
 			else move = intermediate_player.getMove((Game) game);
 			//System.out.println(game.toString());
-			try {
-				((Game) game).makeMove(move[0], move[1]);
-			} catch (Exception E) {
-				if(current_player_char == beginner_player_char)
-					System.out.println("beginner");
-				else System.out.println("intermediate");
-				System.exit(-1);
-			}
+			((Game) game).makeMove(move[0], move[1]);
 		}
 	}
 
