@@ -49,7 +49,7 @@ public class Controller {
 	}
 
 	/**
-	 * Launch a new game
+	 * Start a new Game within this controller.
 	 */
 	public void newGame() {
 		game.deleteObservers();
@@ -75,18 +75,17 @@ public class Controller {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	
 	/**
-	 * Gives the current game
-	 * 
-	 * @return the current game
+	 * Returns the current Game being played.
+	 * @return the Game that controller is controlling.
 	 */
 	public Game getCurrentGame() {
 		return game;
 	}
-
+	
 	/**
-	 * Initialize and display the Main GUI
+	 * An internal method to set up the GUI.
 	 */
 	private void layoutGUI() {
 		g = new MainGUI(this);
@@ -99,7 +98,6 @@ public class Controller {
 	 * graphical view and the text input view
 	 */
 	public class MainGUI extends JFrame implements Observer {
-
 		private JMenuBar menu_options;
 		private JMenu change_view;
 		private JMenu change_difficulty;
@@ -114,15 +112,16 @@ public class Controller {
 		private JPanel default_view;
 
 		private Controller c;
-
+		
 		/**
-		 * Initializes and displays the main GUI
+		 * The GUI itself. Has a menubar for controls and to switch between
+		 * views.
 		 * 
 		 * @param controller
-		 *            The controller of the current game and view
+		 *            The Controller that sets up the GUI so that the GUI and
+		 *            views can access Controller methods.
 		 */
-		public MainGUI(Controller controller) {
-
+		private MainGUI(Controller controller) {
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setTitle("Noughts and Crosses");
 			this.setSize(400, 400);
@@ -188,7 +187,7 @@ public class Controller {
 		}
 
 		/**
-		 * Listener for the menu items
+		 * Listener for each menu bar option.
 		 */
 		private class MenuItemListener implements ActionListener {
 
@@ -269,10 +268,19 @@ public class Controller {
 				new Thread(new DialogThread(curr)).start();
 		}
 
+		/**
+		 * A class that checks for the game's end and pops up a dialog box.
+		 */
 		public class DialogThread implements Runnable {
 
 			Game g;
 
+			/**
+			 * A class that checks for the game's end and pops up a dialog box.
+			 * 
+			 * @param g
+			 *            the game to watch
+			 */
 			public DialogThread(Game g) {
 				this.g = g;
 			}
@@ -303,9 +311,9 @@ public class Controller {
 			}
 
 		}
-
+		
 		/**
-		 * Starts a new game
+		 * Update the GUI views to Observe a new Game.
 		 */
 		public void newGame() {
 			c.newGame();
