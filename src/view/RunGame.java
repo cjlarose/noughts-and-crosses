@@ -17,15 +17,12 @@ public class RunGame implements Observer {
 		r.update(c.getCurrentGame(), null);
 	}
 
-	public RunGame() {
-	}
-
 	@Override
 	public void update(Observable o, Object m) {
 		Game g = (Game) o;
 		System.out.println(g.toString());
 		if (g.isFinished()) {
-			System.out.println("FINISHED");
+			System.out.println(g.getWinner() + " wins");
 		} else {
 			char current_player = g.getCurrentPlayer();
 			System.out.println(current_player + "'s turn");

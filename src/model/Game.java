@@ -48,8 +48,6 @@ public class Game extends Observable {
 
 		int all_moves = player1_moves | player2_moves;
 		if ((all_moves | move) == all_moves) {
-			System.out.println("Illegal Move: " + i + " " + j);
-			System.out.println(this.toString());
 			throw new IllegalArgumentException();
 		}
 
