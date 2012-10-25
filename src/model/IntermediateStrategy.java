@@ -22,10 +22,12 @@ public class IntermediateStrategy implements Strategy {
 	}
 
 	/**
+	 * Given the context of a game and a player, determine a move to make
 	 * @param g
 	 *            is the game to which the move will be added
-	 * @param p
+	 * @param player
 	 *            The current player - the character that is going to move next.
+	 * @return a two-integer array corresponding to a move at [i,j]
 	 */
 	@Override
 	public int[] getMove(Game g, char player) {
