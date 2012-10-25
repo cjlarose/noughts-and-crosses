@@ -1,4 +1,4 @@
-# CSC 335: Naughts & Crosses
+# CSC 335: Noughts & Crosses
 
 Grader: Rohit Umashankar (rohitu)
 
@@ -8,4 +8,10 @@ Grader: Rohit Umashankar (rohitu)
 * Chris La Rose (cjlarose)
 * Tanner Prynn (tpyrnn)
 
-To start the Main GUI, run Contoller.java
+## Git Repo:
+
+ssh://lectura.cs.arizona.edu/home/cjlarose/repos/naughts-and-crosses.git
+
+## For Your convenience
+
+git clone ssh://lectura.cs.arizona.edu/home/cjlarose/repos/naughts-and-crosses.git best-damn-project-ever
