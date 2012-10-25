@@ -15,8 +15,8 @@ public class BeginnerStrategyTest {
 		int[] move = b.getMove(g, 'X');
 		assertTrue(move[0] >= 0 && move[0] <= 2);
 		assertTrue(move[1] >= 0 && move[1] <= 2);
-		
-		//Move in every space except 2,2
+
+		// Move in every space except 2,2
 		g.makeMove(0, 0);
 		g.makeMove(0, 1);
 		g.makeMove(0, 2);
@@ -26,7 +26,7 @@ public class BeginnerStrategyTest {
 		g.makeMove(2, 1);
 		g.makeMove(2, 0);
 
-		//This should get coverage of the while loop with probability 8/9
+		// This should get coverage of the while loop with probability 8/9
 		move = b.getMove(g, 'O');
 		assertTrue(move[0] == 2 && move[1] == 2);
 	}

@@ -75,15 +75,16 @@ public class Controller {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	/**
 	 * Returns the current Game being played.
+	 * 
 	 * @return the Game that controller is controlling.
 	 */
 	public Game getCurrentGame() {
 		return game;
 	}
-	
+
 	/**
 	 * An internal method to set up the GUI.
 	 */
@@ -112,7 +113,7 @@ public class Controller {
 		private JPanel default_view;
 
 		private Controller c;
-		
+
 		/**
 		 * The GUI itself. Has a menubar for controls and to switch between
 		 * views.
@@ -311,7 +312,7 @@ public class Controller {
 			}
 
 		}
-		
+
 		/**
 		 * Update the GUI views to Observe a new Game.
 		 */

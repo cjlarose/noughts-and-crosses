@@ -41,7 +41,7 @@ public class GameTest {
 		g.makeMove(0, 2);
 		assertTrue(g.isFinished());
 		assertEquals(g.getWinner(), 'X');
-		
+
 		g = new Game();
 		g.makeMove(0, 0);
 		g.makeMove(1, 0);
@@ -64,13 +64,13 @@ public class GameTest {
 		assertEquals(g.occupiedBy(1, 1), 'O');
 		assertEquals(g.occupiedBy(2, 2), '\0');
 	}
-	
+
 	@Test
 	public void testToMatrix() {
 		Game g = new Game();
 		char[][] m = g.toMatrix();
-		for(int i = 0; i < 3; i++)
-			for(int j = 0; j < 3; j++)
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
 				assertEquals(m[i][j], '\0');
 		g.makeMove(0, 0);
 		g.makeMove(1, 1);
@@ -78,7 +78,7 @@ public class GameTest {
 		assertEquals(m[0][0], 'X');
 		assertEquals(m[1][1], 'O');
 	}
-	
+
 	@Test
 	public void testToString() {
 		Game g = new Game();

@@ -102,7 +102,8 @@ public class TextFieldInputView extends JPanel implements Observer {
 		}
 
 		/**
-		 * Reads the values in the input boxes and make the corresponding move on the game.
+		 * Reads the values in the input boxes and make the corresponding move
+		 * on the game.
 		 */
 		private void makeMove() {
 			int i = Integer.parseInt(rowInput.getText());
@@ -115,7 +116,7 @@ public class TextFieldInputView extends JPanel implements Observer {
 			} catch (IllegalArgumentException e) {
 			}
 		}
-		
+
 		/**
 		 * Listener for clicking the "move" button
 		 */

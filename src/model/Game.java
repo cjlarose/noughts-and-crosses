@@ -17,9 +17,9 @@ public class Game extends Observable {
 
 	/**
 	 * A Game is a playable game of Noughts & Crosses, AKA Tic-Tac-Toe.
-	 * Internally, the game is represented as two bit vectors, since my teammates
-	 * are masochists. Using bit logic, we can decide which numbers represent
-	 * winning games, complete games, and individual player's moves.
+	 * Internally, the game is represented as two bit vectors, since my
+	 * teammates are masochists. Using bit logic, we can decide which numbers
+	 * represent winning games, complete games, and individual player's moves.
 	 */
 	public Game() {
 		setChanged();

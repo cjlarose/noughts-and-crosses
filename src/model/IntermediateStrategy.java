@@ -9,7 +9,7 @@ public class IntermediateStrategy implements Strategy {
 			24, 144, 130, 18, 6, 5, 3, 72, 65, 9, 272, 257, 17, 80, 68, 20 };
 	private final int[] wins = { 448, 56, 7, 292, 146, 73, 273, 84 };
 	private final LinkedList<Integer> single_moves;
-	
+
 	/**
 	 * An intermediate strategy that will block an opponent from winning and
 	 * will attempt to win itself.
@@ -23,6 +23,7 @@ public class IntermediateStrategy implements Strategy {
 
 	/**
 	 * Given the context of a game and a player, determine a move to make
+	 * 
 	 * @param g
 	 *            is the game to which the move will be added
 	 * @param player
@@ -34,8 +35,9 @@ public class IntermediateStrategy implements Strategy {
 		int computer_moves = 0;
 		int player_moves = 0;
 		int temp_one = 1;
-		//Building the lists of computer and player moves, as the original method
-		//cannot differentiate
+		// Building the lists of computer and player moves, as the original
+		// method
+		// cannot differentiate
 		char[][] board = g.toMatrix();
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -48,53 +50,56 @@ public class IntermediateStrategy implements Strategy {
 				}
 			}
 		}
-		//Checks for an almost win situation, and responds accordingly.
-		//First: if the almost win situation is in the favor of the computer,
-		//this will return a move that will win the game. 
+		// Checks for an almost win situation, and responds accordingly.
+		// First: if the almost win situation is in the favor of the computer,
+		// this will return a move that will win the game.
 		for (int i : almost_wins) {
 			if ((computer_moves & i) == i) {
 				for (int j : wins) {
 					int loc = j ^ i;
 					if (single_moves.contains(loc)) {
-						 int index = 0;
-						 while (loc != 1) {
-							 loc >>= 1;
+						int index = 0;
+						while (loc != 1) {
+							loc >>= 1;
 							index++;
-						 }
-						 if (!g.isOccupied(index / 3, index % 3)) {
-							 // System.out.println(index);
-							 return new int[] { index / 3, index % 3 };
-						 }
+						}
+						if (!g.isOccupied(index / 3, index % 3)) {
+							// System.out.println(index);
+							return new int[] { index / 3, index % 3 };
+						}
 					}
 				}
 			}
-			//Second: if the almost win situation is in favor of the other player,
-			//this will return a move that will block the win (blocks only the first occurrence of
-			//one)
+			// Second: if the almost win situation is in favor of the other
+			// player,
+			// this will return a move that will block the win (blocks only the
+			// first occurrence of
+			// one)
 			if ((player_moves & i) == i) {
 				for (int j : wins) {
 					int loc = j ^ i;
 					if (single_moves.contains(loc)) {
-						 int index = 0;
-						 while (loc != 1) {
-							 loc >>= 1;
+						int index = 0;
+						while (loc != 1) {
+							loc >>= 1;
 							index++;
-						 }
-						 if (!g.isOccupied(index / 3, index % 3)) {
-							 // System.out.println(index);
-							 return new int[] { index / 3, index % 3 };
-						 }
+						}
+						if (!g.isOccupied(index / 3, index % 3)) {
+							// System.out.println(index);
+							return new int[] { index / 3, index % 3 };
+						}
 					}
 				}
 			}
 		}
-		
-		//Finally: if there is no almost win situation, returns a random valid move. 
+
+		// Finally: if there is no almost win situation, returns a random valid
+		// move.
 		Random r = new Random();
 		int i = r.nextInt(9);
 		while (g.isOccupied(i / 3, i % 3))
 			i = (i + 1) % 9;
-		return new int[] {i / 3, i % 3};
+		return new int[] { i / 3, i % 3 };
 
 	}
 
