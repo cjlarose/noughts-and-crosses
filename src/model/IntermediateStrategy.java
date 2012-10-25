@@ -11,8 +11,8 @@ public class IntermediateStrategy implements Strategy {
 	private final LinkedList<Integer> single_moves;
 	
 	/**
-	 * Constructs the list used to determine if a almost win to block
-	 * or win is a valid, single move. 
+	 * An intermediate strategy that will block an opponent from winning and
+	 * will attempt to win itself.
 	 */
 	public IntermediateStrategy() {
 		single_moves = new LinkedList<Integer>();
@@ -22,8 +22,10 @@ public class IntermediateStrategy implements Strategy {
 	}
 
 	/**
-	 * @param g is the game to which the move will be added
-	 * @ param p The current player. The AIPlayer, in the case of this class.
+	 * @param g
+	 *            is the game to which the move will be added
+	 * @param p
+	 *            The current player - the character that is going to move next.
 	 */
 	@Override
 	public int[] getMove(Game g, char player) {
