@@ -15,6 +15,12 @@ public class Game extends Observable {
 	private boolean finished = false;
 	private char winner = '\0';
 
+	/**
+	 * A Game is a playable game of Naughts & Crosses, AKA Tic-Tac-Toe.
+	 * Internally, the game is represented as one integer, since my teammates
+	 * are masochists. Using bit logic, we can decide which numbers represent
+	 * winning games, complete games, and individual player's moves.
+	 */
 	public Game() {
 		setChanged();
 		// This will NOT call any Observer's update methods, since you can't add
