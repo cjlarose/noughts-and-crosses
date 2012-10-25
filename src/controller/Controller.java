@@ -219,11 +219,8 @@ public class Controller {
 		
 		public void update(Observable o, Object arg) {
 			Game curr = (Game) o;
-			System.out.println("Game is finished");
-			if (curr.isFinished()) {
-				Thread my_thread = new Thread(new DialogThread(curr));
-				my_thread.start();
-			}
+			if (curr.isFinished())
+				new Thread(new DialogThread(curr)).start();
 		}
 		
 		public class DialogThread implements Runnable {
