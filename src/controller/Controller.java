@@ -198,7 +198,7 @@ public class Controller {
 					System.out.println("Beginner mode");
 					beginner.setState(true);
 					intermediate.setState(false);
-					opponent = new Player(new BeginnerStrategy());
+					opponent.setStrategy(new BeginnerStrategy());
 					// Change to beginner
 				}
 
@@ -206,7 +206,7 @@ public class Controller {
 					System.out.println("Intermediate mode");
 					beginner.setState(false);
 					intermediate.setState(true);
-					opponent = new Player(new IntermediateStrategy());
+					opponent.setStrategy(new IntermediateStrategy());
 					// change to intermediate
 				}
 
