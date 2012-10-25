@@ -12,7 +12,7 @@ public class TestGame {
 		Game g = new Game();
 		assertFalse(g.isFinished());
 		assertEquals('\0', g.getWinner());
-		assertEquals('\0', g.occupied(0,0));
+		assertEquals('\0', g.occupiedBy(0,0));
 		assertFalse(g.isOccupied(0,0));
 		
 		char[][] board = new char[3][3];
@@ -37,9 +37,9 @@ public class TestGame {
 		
 		assertEquals('X', g.getWinner());
 		assertTrue(g.isFinished());
-		assertEquals('X', g.occupied(0,0));
+		assertEquals('X', g.occupiedBy(0,0));
 		assertTrue(g.isOccupied(0,0));
-		assertEquals('O', g.occupied(0,1));
+		assertEquals('O', g.occupiedBy(0,1));
 		assertTrue(g.isOccupied(0, 1));
 		
 		System.out.println();

@@ -16,6 +16,6 @@ public class BeginnerStrategy implements Strategy {
 		int i = r.nextInt(9);
 		while (g.isOccupied(i / 3, i % 3))
 			i = (i + 1) % 9;
-		return new int[] {i / 3, i % 3};
+		return new int[] { i / 3, i % 3 };
 	}
 }

@@ -9,15 +9,16 @@ import controller.Controller;
 import model.Game;
 
 public class RunGame implements Observer {
-	
+
 	public static void main(String[] args) {
 		Controller c = new Controller();
 		RunGame r = new RunGame();
 		c.getCurrentGame().addObserver(r);
 		r.update(c.getCurrentGame(), null);
 	}
-	
-	public RunGame() {}
+
+	public RunGame() {
+	}
 
 	@Override
 	public void update(Observable o, Object m) {
@@ -33,7 +34,7 @@ public class RunGame implements Observer {
 			int j = s.nextInt();
 			try {
 				g.makeMove(i, j);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("ILLEGAL MOVE");
 				this.update(o, null);
 			}
