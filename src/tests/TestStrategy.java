@@ -37,7 +37,7 @@ public class TestStrategy {
 		g.makeMove(new int [] {0, 0});
 		g.makeMove(new int [] {0, 1});
 		g.makeMove(new int [] {1, 0});
-		//System.out.println(g.toString());
+		System.out.println(g.toString() + "\n");
 		
 		move = s.getMove(g, 'O');
 		assertEquals(2, move[0]);
@@ -51,7 +51,7 @@ public class TestStrategy {
 		g.makeMove(new int [] {0, 2});
 		g.makeMove(new int [] {1, 1});
 		g.makeMove(new int [] {2, 0});
-		//System.out.println(g.toString());
+		System.out.println(g.toString()  + "\n");
 		
 		move = s.getMove(g, 'O');
 		assertEquals(2, move[0]);
