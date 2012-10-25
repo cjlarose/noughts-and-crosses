@@ -40,11 +40,17 @@ public class Controller {
 		c.layoutGUI();
 	}
 	
+	/**
+	 * A controller that coordinates between a Game and its GUI representation.
+	 */
 	public Controller() {
 		game = new Game();
 		opponent = new Player(new BeginnerStrategy());
 	}
 	
+	/**
+	 * Start a new Game within this controller.
+	 */
 	public void newGame() {
 		game.deleteObservers();
 		game = new Game();
@@ -52,6 +58,11 @@ public class Controller {
 		//game.notifyObservers("New game");
 	}
 	
+	/**
+	 * Make a move at the given spot.
+	 * @param i
+	 * @param j
+	 */
 	public void makeMove(int i, int j) {
 		try {
 			game.makeMove(i, j);
@@ -62,16 +73,26 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Returns the current Game being played.
+	 * @return the Game that controller is controlling.
+	 */
 	public Game getCurrentGame() {
 		return game;
 	}
 	
+	/**
+	 * An internal method to set up the GUI.
+	 */
 	private void layoutGUI() {
 		g = new MainGUI(this);
 		game.addObserver(g);
 	}
 	
-	public class MainGUI extends JFrame implements Observer {
+	/**
+	 * The MainGUI that holds the two different views of the current Game.
+	 */
+	private class MainGUI extends JFrame implements Observer {
 		 
 		private JMenuBar menu_options;
 		private JMenu change_view;
@@ -88,7 +109,15 @@ public class Controller {
 		
 		private Controller c;
 		
-		public MainGUI(Controller controller) {
+		/**
+		 * The GUI itself. Has a menubar for controls and to switch between
+		 * views.
+		 * 
+		 * @param controller
+		 *            The Controller that sets up the GUI so that the GUI and
+		 *            views can access Controller methods.
+		 */
+		private MainGUI(Controller controller) {
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setTitle("Noughts and Crosses");
@@ -154,6 +183,9 @@ public class Controller {
 			this.pack();
 		}
 		
+		/**
+		 * Listener for each menu bar option.
+		 */
 		private class MenuItemListener implements ActionListener {
 
 			@Override
@@ -217,15 +249,26 @@ public class Controller {
 			
 		}
 		
+		@Override
 		public void update(Observable o, Object arg) {
 			Game curr = (Game) o;
 			if (curr.isFinished())
 				new Thread(new DialogThread(curr)).start();
 		}
 		
+		/**
+		 * A class that checks for the game's end and pops up a dialog box.
+		 */
 		public class DialogThread implements Runnable {
 			
 			Game g;
+
+			/**
+			 * A class that checks for the game's end and pops up a dialog box.
+			 * 
+			 * @param g
+			 *            the game to watch
+			 */
 			public DialogThread(Game g) {
 				this.g = g;
 			}
@@ -248,6 +291,9 @@ public class Controller {
 			
 		}
 		
+		/**
+		 * Update the GUI views to Observe a new Game.
+		 */
 		public void newGame() {
 			c.newGame();
 			c.getCurrentGame().addObserver((Observer) graphic_view);
