@@ -1,5 +1,7 @@
 # CSC 335: Noughts & Crosses
 
+![screenshot](https://raw.githubusercontent.com/cjlarose/noughts-and-crosses/master/screenshot.png)
+
 Grader: Rohit Umashankar (rohitu)
 
 ## Authors: 
